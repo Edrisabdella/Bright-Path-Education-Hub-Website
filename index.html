@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Bright Path Education Hub | Real Learning Platform</title>
+  <!-- Tailwind + Font Awesome + localForage -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+    .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease-in-out; z-index: 0; }
+    .slide-bg.active { opacity: 1; z-index: 1; }
+    .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.65); z-index: 2; }
+    .hero-content { position: relative; z-index: 3; }
+    .service-card { transition: all 0.3s; background: white; border-radius: 1.25rem; }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.15); }
+    .modal { transition: opacity 0.2s ease; }
+    .admin-badge { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- NAVBAR with login/logout -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center flex-wrap">
+      <div class="flex items-center space-x-2">
+        <span class="text-2xl font-bold text-indigo-800">Bright Path</span>
+        <span class="text-sm font-semibold bg-yellow-400 text-indigo-900 px-2 py-0.5 rounded-full">Education Hub</span>
+      </div>
+      <div class="hidden md:flex space-x-6 font-medium text-gray-700 items-center">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <div id="authNav" class="flex gap-3">
+          <button id="loginBtnNav" class="bg-indigo-600 text-white px-3 py-1 rounded-full text-sm">Login</button>
+          <button id="logoutBtnNav" class="hidden bg-red-500 text-white px-3 py-1 rounded-full text-sm">Logout</button>
+          <span id="userNameDisplay" class="text-sm font-semibold text-gray-700 hidden"></span>
+        </div>
+      </div>
+      <div class="md:hidden"><button id="mobile-menu-btn" class="text-2xl"><i class="fas fa-bars"></i></button></div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white pb-4 px-4 flex flex-col space-y-3 border-t"></div>
+  </nav>
+
+  <!-- HERO SECTION (slider) -->
+  <section id="home" class="relative h-[90vh] min-h-[600px] flex items-center justify-center text-white">
+    <div class="hero-slider">
+      <div class="slide-bg active" style="background-image: url('https://i.ibb.co/SDSQg9H4/photo-1-2026-04-17-21-33-56.jpg');"></div>
+      <div class="slide-bg" style="background-image: url('https://i.ibb.co/JW2T32jR/photo-2-2026-04-17-21-33-56.jpg');"></div>
+      <div class="slide-bg" style="background-image: url('https://i.ibb.co/RWywwBn/photo-3-2026-04-17-21-33-56.jpg');"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content container mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-6xl font-extrabold">Bright Path Education Hub</h1>
+      <p class="text-xl mt-4">Online & Face-to-Face | Tutor & Training Center</p>
+      <p class="text-lg mt-2">Learn Smarter • Achieve Higher</p>
+      <div class="mt-8 flex gap-4 justify-center">
+        <a href="#services" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold px-6 py-3 rounded-full">Explore Programs</a>
+        <a href="#contact" class="border-2 border-white hover:bg-white hover:text-gray-900 px-6 py-3 rounded-full">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO INTERCHANGE -->
+  <div class="bg-white border-b py-4"><div class="container mx-auto px-4 flex justify-between items-center"><div><span class="text-xs text-gray-500">Brand showcase</span><h3 class="font-bold text-indigo-800">Logo Interchange</h3></div><div class="flex gap-4"><div class="w-16 h-16 rounded-xl overflow-hidden border-2 border-yellow-400"><img id="rotatingLogoImg" src="https://i.ibb.co/SDSQg9H4/photo-1-2026-04-17-21-33-56.jpg" class="w-full h-full object-cover"></div><p class="text-sm text-gray-600"><i class="fas fa-sync-alt text-yellow-500"></i> dynamic identity</p></div></div></div>
+
+  <!-- FOUNDER SECTION -->
+  <section class="py-12 bg-gradient-to-r from-indigo-50 to-sky-50"><div class="container mx-auto px-4"><div class="flex flex-col md:flex-row items-center gap-10 max-w-4xl mx-auto bg-white p-6 rounded-3xl shadow-xl"><div class="w-48 h-48 rounded-full overflow-hidden border-4 border-yellow-400"><img src="https://i.ibb.co/jPGP8K1Y/photo-5-2026-04-17-21-33-56.jpg" class="w-full h-full object-cover"></div><div><h3 class="text-2xl font-bold">Nejat Mahammednur</h3><p class="text-yellow-600 font-semibold">Founder & Director</p><p class="text-gray-600 mt-2">Visionary educator empowering learners globally.</p><div class="flex gap-3 mt-3"><a href="https://www.linkedin.com/in/nejat-mehammednur-2ba9b4232" target="_blank" class="text-blue-700 text-2xl"><i class="fab fa-linkedin"></i></a><a href="mailto:nejat.mahammednur@aau.edu.et" class="text-gray-700 text-2xl"><i class="fas fa-envelope"></i></a></div></div></div></div></section>
+
+  <!-- ABOUT SHORT -->
+  <section id="about" class="py-16 bg-white"><div class="container mx-auto px-4 text-center"><h2 class="text-3xl font-extrabold">About <span class="text-indigo-700">Bright Path</span></h2><div class="w-24 h-1 bg-yellow-500 mx-auto mt-2 mb-4"></div><div class="grid md:grid-cols-4 gap-6 mt-8"><div class="bg-indigo-50 p-6 rounded-2xl"><i class="fas fa-eye text-3xl text-indigo-700"></i><h3 class="font-bold text-xl">Vision</h3><p class="text-sm">Global learning leader</p></div><div class="bg-indigo-50 p-6 rounded-2xl"><i class="fas fa-bullseye text-3xl text-indigo-700"></i><h3 class="font-bold text-xl">Mission</h3><p class="text-sm">Quality & affordable education</p></div><div class="bg-indigo-50 p-6 rounded-2xl"><i class="fas fa-chart-line text-3xl text-indigo-700"></i><h3 class="font-bold text-xl">Goals</h3><p class="text-sm">High success & job-ready skills</p></div><div class="bg-indigo-50 p-6 rounded-2xl"><i class="fas fa-gem text-3xl text-indigo-700"></i><h3 class="font-bold text-xl">Values</h3><p class="text-sm">Excellence, Integrity, Innovation</p></div></div></div></section>
+
+  <!-- SERVICES SECTION (dynamic cards) -->
+  <section id="services" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-extrabold">Our <span class="text-indigo-700">Comprehensive Services</span></h2><p class="text-gray-600">Click any service to access resources & submit assignments</p></div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <!-- PROFESSIONAL TRAINING (short) -->
+  <section id="trainings" class="py-16 bg-white"><div class="container mx-auto px-4"><h2 class="text-3xl font-bold text-center">🚀 Professional & Digital Training</h2><div class="grid md:grid-cols-3 gap-5 mt-10"><div class="flex gap-3 bg-gray-50 p-4 rounded-xl"><i class="fas fa-code text-3xl text-indigo-600"></i><div><h4 class="font-bold">Full Stack Dev</h4></div></div><div class="flex gap-3 bg-gray-50 p-4 rounded-xl"><i class="fas fa-chart-simple text-3xl text-indigo-600"></i><div><h4 class="font-bold">Digital Marketing</h4></div></div><div class="flex gap-3 bg-gray-50 p-4 rounded-xl"><i class="fas fa-video text-3xl text-indigo-600"></i><div><h4 class="font-bold">Video Editing</h4></div></div></div></div></section>
+
+  <!-- LANGUAGE + QURAN -->
+  <section class="py-16 bg-indigo-50"><div class="container mx-auto px-4 grid md:grid-cols-2 gap-10"><div class="bg-white p-6 rounded-2xl"><h3 class="text-2xl font-bold"><i class="fas fa-language text-indigo-600"></i> Language Training</h3><div class="flex flex-wrap gap-2 mt-4"><span class="bg-gray-100 px-3 py-1 rounded-full">English</span><span class="bg-gray-100 px-3 py-1 rounded-full">Arabic</span><span class="bg-gray-100 px-3 py-1 rounded-full">German</span><span class="bg-gray-100 px-3 py-1 rounded-full">French</span><span class="bg-gray-100 px-3 py-1 rounded-full">Turkish</span><span class="bg-gray-100 px-3 py-1 rounded-full">Amharic</span><span class="bg-gray-100 px-3 py-1 rounded-full">Tigrigna</span><span class="bg-gray-100 px-3 py-1 rounded-full">Afan Oromo</span></div></div><div class="bg-white p-6 rounded-2xl"><h3 class="text-2xl font-bold"><i class="fas fa-quran text-emerald-700"></i> Quran & Islamic Education</h3><p>✅ Tejwid to Hifz | ✅ Islamic studies for all ages</p></div></div></section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="py-16 bg-gray-900 text-white"><div class="container mx-auto px-4 text-center"><h2 class="text-3xl font-bold">Connect With Bright Path</h2><div class="flex flex-wrap justify-center gap-5 my-6"><a href="tel:+251911870215" class="bg-green-600 hover:bg-green-700 px-5 py-3 rounded-full text-lg font-semibold"><i class="fas fa-phone-alt"></i> +251911870215</a><a href="mailto:nejat.mahammednur@aau.edu.et" class="bg-gray-700 px-5 py-3 rounded-full">Email Us</a></div><div class="flex flex-wrap justify-center gap-6"><a href="https://youtube.com/@educationhubacademy-u3n" target="_blank" class="bg-red-600 p-3 rounded-full w-14 h-14 text-2xl"><i class="fab fa-youtube"></i></a><a href="https://www.linkedin.com/in/nejat-mehammednur-2ba9b4232" target="_blank" class="bg-blue-700 p-3 rounded-full"><i class="fab fa-linkedin-in"></i></a><a href="https://chat.whatsapp.com/DTopuLRhZlt9dcVQHJ5sG8" target="_blank" class="bg-green-600 p-3 rounded-full"><i class="fab fa-whatsapp"></i></a><a href="https://t.me/+3bEp1cZmq9UwZTBk" target="_blank" class="bg-sky-600 p-3 rounded-full"><i class="fab fa-telegram-plane"></i></a></div></div></section>
+
+  <footer class="bg-gray-800 py-6 text-center text-gray-300 text-sm"><p>© 2026 Bright Path Education Hub — 📞 +251911870215</p></footer>
+
+  <!-- Admin Button (floating) -->
+  <div class="admin-badge"><button id="adminBtn" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-full shadow-lg"><i class="fas fa-user-shield"></i> Admin</button></div>
+
+  <!-- MODAL for service resources + submissions -->
+  <div id="serviceModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4"><div class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto"><div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center"><h3 id="modalTitle" class="text-xl font-bold"></h3><button id="closeModalBtn" class="text-gray-600 text-2xl">&times;</button></div><div id="modalBody" class="p-5 space-y-5"></div></div></div>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center"><div class="bg-white rounded-2xl p-6 w-96"><h2 class="text-2xl font-bold mb-4">Learner Login / Sign Up</h2><input type="text" id="loginName" placeholder="Full Name" class="w-full border p-2 rounded mb-3"><input type="email" id="loginEmail" placeholder="Email" class="w-full border p-2 rounded mb-3"><button id="doLoginBtn" class="bg-indigo-600 text-white w-full py-2 rounded">Login / Register</button><p class="text-xs text-gray-500 mt-2">Your submissions will be saved under this name.</p></div></div>
+
+  <script>
+    // ---------- STORAGE ----------
+    const resourcesDB = localforage.createInstance({ name: "BrightPathHub", storeName: "resources" });
+    const submissionsDB = localforage.createInstance({ name: "BrightPathHub", storeName: "submissions" });
+    const usersDB = localforage.createInstance({ name: "BrightPathHub", storeName: "users" });
+
+    // Services list
+    const servicesList = [
+      "Grade 1-12 All subjects", "University course tutor", "Entrance Exam Prep (6,8,12)", "Exit Exam Prep (College/Uni)",
+      "Special Training: NGOs/Companies", "Consultancy (Academic & Career)", "IELTS / TOEFL / GAT / SAT Prep", "Full Stack Development",
+      "Digital Marketing", "Content Creation", "Video Editing", "ICT Training", "Website & Software Development", "Forex Trading",
+      "Motion Graphics", "Graphics Design", "Scholarship & Research", "Language Training (7+ languages)", "Quran Tejwid & Hifz"
+    ];
+
+    let currentUser = null; // { name, email }
+    let currentService = '';
+
+    // Helper: read file as dataURL
+    function readFileAsDataURL(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Render service cards
+    function renderServices() {
+      const grid = document.getElementById('servicesGrid');
+      grid.innerHTML = '';
+      servicesList.forEach(service => {
+        const card = document.createElement('div');
+        card.className = 'service-card bg-white p-5 rounded-2xl shadow-md hover:shadow-xl border';
+        card.innerHTML = `
+          <div class="text-indigo-600 text-3xl mb-3"><i class="fas fa-chalkboard-user"></i></div>
+          <h3 class="font-bold text-lg text-gray-800">${service}</h3>
+          <p class="text-gray-500 text-xs mt-2">Expert instructors • flexible</p>
+          <button class="resource-open-btn mt-4 bg-indigo-100 hover:bg-indigo-200 text-indigo-800 px-3 py-1.5 rounded-full text-sm w-full flex items-center justify-center gap-2" data-service="${service}"><i class="fas fa-folder-open"></i> Resources & Submit</button>
+        `;
+        grid.appendChild(card);
+      });
+      document.querySelectorAll('.resource-open-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => openServiceModal(btn.getAttribute('data-service')));
+      });
+    }
+
+    // Open modal for a service
+    async function openServiceModal(serviceName) {
+      if (!currentUser) { alert("Please login first to access resources and submit work."); document.getElementById('loginModal').classList.remove('hidden'); document.getElementById('loginModal').style.display = 'flex'; return; }
+      currentService = serviceName;
+      document.getElementById('modalTitle').innerText = `${serviceName} - Resources & Submissions`;
+      const modalBody = document.getElementById('modalBody');
+      modalBody.innerHTML = '<div class="animate-pulse text-gray-500">Loading...</div>';
+      document.getElementById('serviceModal').classList.remove('hidden');
+      document.getElementById('serviceModal').style.display = 'flex';
+
+      let resources = await resourcesDB.getItem(serviceName) || [];
+      let submissions = await submissionsDB.getItem(serviceName) || [];
+      // filter user's own submissions
+      let userSubmissions = submissions.filter(sub => sub.userEmail === currentUser.email);
+
+      modalBody.innerHTML = `
+        <div class="mb-6"><h4 class="font-bold text-lg"><i class="fas fa-download text-green-600"></i> Available Resources</h4><div id="resourcesList" class="space-y-2 mt-2"></div></div>
+        <div class="border-t pt-4"><h4 class="font-bold text-lg"><i class="fas fa-upload text-blue-600"></i> Submit Assignment / Quiz / Project</h4>
+          <form id="submissionForm" class="mt-3 space-y-3">
+            <input type="text" id="submissionTitle" placeholder="Title (e.g., Assignment 1, Final Project)" class="w-full border rounded-lg p-2" required>
+            <textarea id="submissionDesc" rows="2" placeholder="Description / answers / link to work" class="w-full border rounded-lg p-2"></textarea>
+            <input type="file" id="submissionFile" class="w-full border rounded-lg p-2">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"><i class="fas fa-paper-plane"></i> Submit Work</button>
+          </form>
+        </div>
+        <div class="border-t pt-4 mt-4"><h4 class="font-bold text-lg"><i class="fas fa-history"></i> Your Submissions (${currentUser.name})</h4><div id="userSubmissionsList" class="space-y-2 mt-2 max-h-40 overflow-y-auto"></div></div>
+      `;
+
+      const resourcesDiv = document.getElementById('resourcesList');
+      if (resources.length === 0) resourcesDiv.innerHTML = '<p class="text-gray-400 text-sm">No resources uploaded yet.</p>';
+      else {
+        resources.forEach(res => {
+          const div = document.createElement('div');
+          div.className = 'resource-item p-2 rounded flex justify-between items-center bg-gray-50';
+          div.innerHTML = `<span><i class="fas fa-file-pdf text-red-500"></i> ${res.name}</span><a href="${res.dataURL}" download="${res.name}" class="bg-green-500 text-white px-2 py-1 rounded text-xs"><i class="fas fa-download"></i> Download</a>`;
+          resourcesDiv.appendChild(div);
+        });
+      }
+
+      const userSubsDiv = document.getElementById('userSubmissionsList');
+      if (userSubmissions.length === 0) userSubsDiv.innerHTML = '<p class="text-gray-400 text-sm">You have not submitted anything for this service yet.</p>';
+      else {
+        userSubmissions.slice().reverse().forEach(sub => {
+          const subEl = document.createElement('div');
+          subEl.className = 'submission-item p-2 rounded text-sm border-l-4 border-blue-300 bg-gray-50';
+          subEl.innerHTML = `<strong>${sub.title}</strong><br><span class="text-xs text-gray-500">${sub.desc.substring(0,100)}</span><br><span class="text-xs text-gray-400">${new Date(sub.date).toLocaleString()}</span>`;
+          userSubsDiv.appendChild(subEl);
+        });
+      }
+
+      // Handle submission
+      const form = document.getElementById('submissionForm');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const title = document.getElementById('submissionTitle').value.trim();
+        const desc = document.getElementById('submissionDesc').value.trim();
+        const fileInput = document.getElementById('submissionFile');
+        let fileData = null;
+        if (fileInput.files.length) fileData = await readFileAsDataURL(fileInput.files[0]);
+        const submission = {
+          userEmail: currentUser.email,
+          userName: currentUser.name,
+          title, desc, fileData,
+          date: new Date().toISOString(),
+          service: currentService
+        };
+        let existing = await submissionsDB.getItem(currentService) || [];
+        existing.push(submission);
+        await submissionsDB.setItem(currentService, existing);
+        // email notification
+        const mailBody = `New submission from ${currentUser.name} (${currentUser.email})%0AService: ${currentService}%0ATitle: ${title}%0ADescription: ${desc}`;
+        window.open(`mailto:nejat.mahammednur@aau.edu.et?subject=New%20Submission%20-${currentService}&body=${mailBody}`);
+        alert('Submission saved! Admin notified.');
+        form.reset();
+        openServiceModal(currentService);
+      });
+    }
+
+    // Admin panel
+    async function showAdminDashboard() {
+      let allSubmissions = [];
+      for (let svc of servicesList) {
+        let subs = await submissionsDB.getItem(svc) || [];
+        subs.forEach(s => s.service = svc);
+        allSubmissions.push(...subs);
+      }
+      let html = `<div class="fixed inset-0 bg-black bg-opacity-80 z-[100] flex items-center justify-center p-4" id="adminDashboard"><div class="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6"><div class="flex justify-between"><h2 class="text-2xl font-bold">Admin Panel</h2><button id="closeAdminBtn" class="text-2xl">&times;</button></div>
+      <div class="mt-4"><h3 class="font-bold">Upload Resource to a Service</h3><select id="adminServiceSelect" class="border p-2 rounded w-full mt-1">${servicesList.map(s => `<option value="${s}">${s}</option>`).join('')}</select>
+      <input type="file" id="adminResourceFile" class="border p-2 w-full mt-2"><input type="text" id="resourceCustomName" placeholder="Resource name" class="border p-2 w-full mt-2"><button id="uploadResourceBtn" class="bg-indigo-600 text-white px-4 py-2 rounded mt-2">Upload</button></div>
+      <div class="mt-6"><h3 class="font-bold">All Learner Submissions</h3><div id="allSubmissionsList" class="max-h-60 overflow-y-auto border p-2 rounded">${allSubmissions.map(sub => `<div class="border-b p-2"><strong>${sub.userName}</strong> (${sub.service})<br>${sub.title}<br>${sub.desc}<br><span class="text-xs">${new Date(sub.date).toLocaleString()}</span>${sub.fileData ? `<br><a href="${sub.fileData}" download="submission_file" class="text-blue-600 text-sm">Download file</a>` : ''}</div>`).join('')}</div></div>
+      </div></div>`;
+      document.body.insertAdjacentHTML('beforeend', html);
+      document.getElementById('closeAdminBtn').addEventListener('click', () => document.getElementById('adminDashboard').remove());
+      document.getElementById('uploadResourceBtn').addEventListener('click', async () => {
+        const service = document.getElementById('adminServiceSelect').value;
+        const file = document.getElementById('adminResourceFile').files[0];
+        const customName = document.getElementById('resourceCustomName').value;
+        if (!file) { alert("Select a file"); return; }
+        const dataURL = await readFileAsDataURL(file);
+        const resourceName = customName || file.name;
+        let existing = await resourcesDB.getItem(service) || [];
+        existing.push({ name: resourceName, dataURL, date: new Date().toISOString() });
+        await resourcesDB.setItem(service, existing);
+        alert(`Resource added to ${service}`);
+        document.getElementById('adminDashboard').remove();
+        if (currentService) openServiceModal(currentService);
+      });
+    }
+
+    // Auth handlers
+    document.getElementById('loginBtnNav').addEventListener('click', () => { document.getElementById('loginModal').classList.remove('hidden'); document.getElementById('loginModal').style.display = 'flex'; });
+    document.getElementById('doLoginBtn').addEventListener('click', async () => {
+      const name = document.getElementById('loginName').value.trim();
+      const email = document.getElementById('loginEmail').value.trim();
+      if (!name || !email) { alert("Enter name and email"); return; }
+      currentUser = { name, email };
+      localStorage.setItem('brightpath_user', JSON.stringify(currentUser));
+      document.getElementById('loginModal').classList.add('hidden');
+      document.getElementById('loginModal').style.display = 'none';
+      document.getElementById('loginBtnNav').classList.add('hidden');
+      document.getElementById('logoutBtnNav').classList.remove('hidden');
+      document.getElementById('userNameDisplay').classList.remove('hidden');
+      document.getElementById('userNameDisplay').innerText = `Hi, ${name}`;
+    });
+    document.getElementById('logoutBtnNav').addEventListener('click', () => {
+      currentUser = null;
+      localStorage.removeItem('brightpath_user');
+      document.getElementById('loginBtnNav').classList.remove('hidden');
+      document.getElementById('logoutBtnNav').classList.add('hidden');
+      document.getElementById('userNameDisplay').classList.add('hidden');
+    });
+    // restore session
+    const savedUser = localStorage.getItem('brightpath_user');
+    if (savedUser) {
+      currentUser = JSON.parse(savedUser);
+      document.getElementById('loginBtnNav').classList.add('hidden');
+      document.getElementById('logoutBtnNav').classList.remove('hidden');
+      document.getElementById('userNameDisplay').classList.remove('hidden');
+      document.getElementById('userNameDisplay').innerText = `Hi, ${currentUser.name}`;
+    }
+
+    // Admin button
+    document.getElementById('adminBtn').addEventListener('click', () => {
+      const pwd = prompt("Enter admin password:");
+      if (pwd === 'admin123') showAdminDashboard();
+      else alert("Wrong password");
+    });
+
+    // Modal close
+    document.getElementById('closeModalBtn').addEventListener('click', () => {
+      document.getElementById('serviceModal').classList.add('hidden');
+      document.getElementById('serviceModal').style.display = 'none';
+    });
+
+    // Slider, logo rotator, mobile menu
+    const slides = document.querySelectorAll('.slide-bg');
+    let idx = 0;
+    setInterval(() => { slides[idx].classList.remove('active'); idx = (idx+1)%slides.length; slides[idx].classList.add('active'); }, 5000);
+    const logoImgs = ['https://i.ibb.co/SDSQg9H4/photo-1-2026-04-17-21-33-56.jpg','https://i.ibb.co/JW2T32jR/photo-2-2026-04-17-21-33-56.jpg','https://i.ibb.co/RWywwBn/photo-3-2026-04-17-21-33-56.jpg'];
+    let l=0; setInterval(()=>{ l=(l+1)%logoImgs.length; document.getElementById('rotatingLogoImg').src=logoImgs[l]; },4000);
+    document.getElementById('mobile-menu-btn').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.toggle('hidden');});
+    renderServices();
+  </script>
+</body>
+</html>
