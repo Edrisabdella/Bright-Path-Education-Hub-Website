@@ -68,10 +68,13 @@ Bright Path Education Hub is a fully functional online learning platform that br
 
 ## 📁 Project Structure
 
-/
-├── index.html # Complete single‑page application
-├── README.md # This file
-The entire application is contained in one HTML file – easy to deploy, modify, and distribute.
+bright-path-hub/
+├── server.js
+├── package.json
+├── .env
+├── database.sqlite (created automatically)
+└── public/
+    └── index.html
 
 ---
 
