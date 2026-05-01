@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Bright Path Education Hub – Complete Platform</title>
-  <!-- Tailwind CSS + Font Awesome -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -15,6 +14,12 @@
     .admin-badge { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
     .nav-link { transition: color 0.2s; }
     .nav-link:hover { color: #eab308; }
+    /* Hero slider */
+    .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+    .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease-in-out; z-index: 0; }
+    .slide-bg.active { opacity: 1; z-index: 1; }
+    .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.65); z-index: 2; }
+    .hero-content { position: relative; z-index: 3; }
   </style>
 </head>
 <body class="bg-gray-50">
@@ -44,7 +49,6 @@
         <button id="mobileMenuBtn" class="text-2xl"><i class="fas fa-bars"></i></button>
       </div>
     </div>
-    <!-- Mobile menu -->
     <div id="mobileMenu" class="hidden md:hidden bg-white pb-4 px-4 flex flex-col space-y-2 border-t">
       <a href="#home" class="py-2">Home</a>
       <a href="#about-full" class="py-2">About</a>
@@ -56,10 +60,20 @@
     </div>
   </nav>
 
-  <!-- ==================== HERO SECTION ==================== -->
-  <section id="home" class="relative h-[85vh] bg-gradient-to-r from-indigo-900 to-purple-900 text-white flex items-center justify-center">
-    <div class="text-center px-4">
-      <h1 class="text-5xl md:text-7xl font-extrabold">Bright Path Education Hub</h1>
+  <!-- ==================== HERO SECTION WITH SLIDER ==================== -->
+  <section id="home" class="relative h-[85vh] text-white flex items-center justify-center">
+    <div class="hero-slider">
+      <div class="slide-bg active" style="background-image: url('https://i.ibb.co/JW2T32jR/photo-2-2026-04-17-21-33-56.jpg');"></div>
+      <div class="slide-bg" style="background-image: url('https://i.ibb.co/RWywwBn/photo-3-2026-04-17-21-33-56.jpg');"></div>
+      <div class="slide-bg" style="background-image: url('https://i.ibb.co/RWywwBn/photo-3-2026-04-17-21-33-56.jpg');"></div>
+      <div class="slide-bg" style="background-image: url('https://i.ibb.co/jPGP8K1Y/photo-5-2026-04-17-21-33-56.jpg');"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content container mx-auto px-4 text-center z-10">
+      <div class="inline-block mb-6">
+        <img src="https://i.ibb.co/jPGP8K1Y/photo-5-2026-04-17-21-33-56.jpg" alt="Logo" class="w-24 h-24 rounded-full border-4 border-yellow-400 mx-auto shadow-lg">
+      </div>
+      <h1 class="text-5xl md:text-7xl font-extrabold drop-shadow-lg">Bright Path Education Hub</h1>
       <p class="text-xl md:text-2xl mt-4">Online & Face-to-Face | Tutor & Training Center</p>
       <p class="text-lg mt-2 italic">Learn Smarter • Achieve Higher</p>
       <div class="mt-8 flex flex-wrap gap-4 justify-center">
@@ -90,7 +104,7 @@
       <h2 class="text-3xl font-bold text-center text-indigo-800 mb-6">About Bright Path Education Hub</h2>
       <div class="bg-white p-8 rounded-2xl shadow-lg space-y-4 text-gray-700 leading-relaxed">
         <p><strong>Bright Path Education Hub</strong> is a premier online and face-to-face learning center founded by Nejat Mahammednur, a PhD candidate at Addis Ababa University and lecturer at Dire Dawa University. Our hub was born from a vision to bridge the gap between traditional education and the demands of the 21st century.</p>
-        <p>We offer comprehensive tutoring from Grade 1 to university level, international exam preparation (IELTS, TOEFL, SAT, GAT), professional digital skills training (full‑stack development, digital marketing, video editing, motion graphics, Forex trading, ICT), language courses in 7+ languages, and Quranic studies with Tajwid and Hifz.</p>
+        <p>We offer comprehensive tutoring from Grade 1 to university level, international exam preparation (IELTS, TOEFL, SAT, GAT, Goethe German), professional digital skills training (full‑stack development, digital marketing, video editing, motion graphics, Forex trading, ICT), language courses in 7+ languages, and Quranic studies with Tajwid and Hifz.</p>
         <p>Our instructors are experienced, our methods are modern, and our commitment is to every learner's success. We believe that <strong>quality education should be accessible, affordable, and personalised</strong>. Whether you are a school student struggling with math, a university student preparing for exit exams, a professional wanting to upskill, or an organisation seeking staff training – Bright Path is your trusted partner.</p>
         <p>We currently serve hundreds of learners across Ethiopia and globally through our flexible online platform and in‑person sessions. Our success rates in national exams and international certifications speak for themselves. Join us today and walk the bright path to excellence.</p>
       </div>
@@ -123,7 +137,7 @@
         <h3 class="text-2xl font-bold">Strategic Goals</h3>
         <ul class="mt-3 list-disc list-inside text-gray-700 space-y-2">
           <li>Improve student academic performance by 40% within 6 months.</li>
-          <li>Achieve 90%+ success rate in international exams (IELTS, TOEFL, SAT).</li>
+          <li>Achieve 90%+ success rate in international exams (IELTS, TOEFL, SAT, Goethe).</li>
           <li>Train 5,000+ learners in digital skills by 2027.</li>
           <li>Expand to 10 African countries through online partnerships.</li>
           <li>Maintain 4.9/5 student satisfaction score.</li>
@@ -145,7 +159,7 @@
     </div>
   </section>
 
-  <!-- ==================== COMPREHENSIVE SERVICES (DETAILED CARDS) ==================== -->
+  <!-- ==================== COMPREHENSIVE SERVICES (with GOETHE) ==================== -->
   <section id="services-detailed" class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold text-center mb-4">Our Comprehensive Services</h2>
@@ -154,12 +168,12 @@
     </div>
   </section>
 
-  <!-- ==================== RESOURCES SECTION (SAMPLE) ==================== -->
+  <!-- ==================== RESOURCES SECTION ==================== -->
   <section id="resources" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-4">Learning Resources & Submissions</h2>
       <p class="mb-6">Access materials, upload your work, and get feedback. All your submissions are saved here.</p>
-      <button id="viewMySubmissionsBtn" class="bg-indigo-600 text-white px-6 py-2 rounded-full">View My Submissions</button>
+      <button id="viewMySubmissionsBtn" class="bg-indigo-600 text-white px-6 py-2 rounded-full shadow hover:bg-indigo-700">View My Submissions</button>
     </div>
   </section>
 
@@ -185,18 +199,20 @@
   </footer>
 
   <!-- ==================== MODALS ==================== -->
-  <!-- Registration / Login Modal -->
+  <!-- Auth Modal (Registration + Login + Verification) -->
   <div id="authModal" class="modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 relative">
       <button id="closeAuthModal" class="absolute top-3 right-5 text-2xl text-gray-600">&times;</button>
       <h2 id="authModalTitle" class="text-2xl font-bold mb-4">Join Bright Path</h2>
+      <!-- Registration Form -->
       <div id="regForm">
         <input type="text" id="regName" placeholder="Full Name" class="w-full border p-2 rounded mb-3" required>
         <input type="email" id="regEmail" placeholder="Email Address" class="w-full border p-2 rounded mb-3" required>
         <select id="serviceSelect" class="w-full border p-2 rounded mb-3">
           <option value="">Select your program</option>
           <option>Grade 1-12</option><option>University Course Tutor</option><option>Entrance Exam Prep</option>
-          <option>IELTS/TOEFL/SAT</option><option>Digital Skills</option><option>Language Training</option><option>Quran & Islamic</option>
+          <option>IELTS/TOEFL/SAT</option><option>Goethe German Exam</option><option>Digital Skills</option>
+          <option>Language Training</option><option>Quran & Islamic</option>
         </select>
         <select id="gradeSelect" class="w-full border p-2 rounded mb-3">
           <option value="">Select Grade (if applicable)</option>
@@ -204,12 +220,20 @@
           <option>Grade 6</option><option>Grade 7</option><option>Grade 8</option><option>Grade 9</option><option>Grade 10</option>
           <option>Grade 11</option><option>Grade 12</option><option>University</option><option>Professional</option>
         </select>
-        <button id="registerBtn" class="bg-indigo-600 text-white w-full py-2 rounded mt-2">Register & Start Learning</button>
+        <button id="registerBtn" class="bg-indigo-600 text-white w-full py-2 rounded mt-2">Register & Send Code</button>
         <p class="text-center text-sm mt-3">Already registered? <button id="switchToLogin" class="text-indigo-600 underline">Login here</button></p>
         <hr class="my-4">
         <p class="text-center text-sm">Or register via Google Form:</p>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUDz5Ue3ip34oibjRUkV1H1IxRcT2VPW4tVHnVxnXWHZuM0w/viewform?usp=publish-editor" target="_blank" class="block text-center bg-red-500 text-white py-2 rounded mt-2">Open Google Form</a>
       </div>
+      <!-- Verification Form -->
+      <div id="verifyForm" class="hidden">
+        <p class="mb-2">A verification code has been sent to your email. Enter it below:</p>
+        <input type="text" id="verificationCode" placeholder="6-digit code" class="w-full border p-2 rounded mb-3">
+        <button id="verifyBtn" class="bg-green-600 text-white w-full py-2 rounded">Verify & Complete Registration</button>
+        <p class="text-center text-sm mt-3"><button id="resendCodeBtn" class="text-indigo-600 underline">Resend code</button></p>
+      </div>
+      <!-- Login Form -->
       <div id="loginForm" class="hidden">
         <input type="email" id="loginEmail" placeholder="Your registered email" class="w-full border p-2 rounded mb-3">
         <button id="loginSubmitBtn" class="bg-green-600 text-white w-full py-2 rounded">Login</button>
@@ -218,7 +242,7 @@
     </div>
   </div>
 
-  <!-- Service Modal (Resources & Submit) -->
+  <!-- Service Modal -->
   <div id="serviceModal" class="modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 p-4">
     <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-6 relative">
       <button id="closeServiceModal" class="absolute top-3 right-5 text-3xl text-gray-600">&times;</button>
@@ -227,41 +251,44 @@
     </div>
   </div>
 
-  <!-- Admin Panel (floating button) -->
+  <!-- Admin Button -->
   <button id="adminBtn" class="admin-badge bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-full shadow-lg"><i class="fas fa-user-shield"></i> Admin</button>
 
   <script>
-    // ---------- LOCALSTORAGE / INDEXEDDB SIMULATION ----------
+    const API_URL = '';
     let currentUser = null;
+    let pendingEmail = null;
 
-    // Initialize data
-    if (!localStorage.getItem('brightpath_users')) {
-      localStorage.setItem('brightpath_users', JSON.stringify([]));
-    }
-    if (!localStorage.getItem('brightpath_submissions')) {
-      localStorage.setItem('brightpath_submissions', JSON.stringify([]));
-    }
-
-    function saveUsers(users) { localStorage.setItem('brightpath_users', JSON.stringify(users)); }
-    function getUsers() { return JSON.parse(localStorage.getItem('brightpath_users')); }
-    function saveSubmissions(subs) { localStorage.setItem('brightpath_submissions', JSON.stringify(subs)); }
-    function getSubmissions() { return JSON.parse(localStorage.getItem('brightpath_submissions')); }
-
-    // Helper: send email notification via mailto
-    function notifyFounder(subject, body) {
-      window.open(`mailto:nejat.mahammednur@aau.edu.et?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-    }
-
-    // Services list (19 services)
+    // Services including Goethe
     const servicesList = [
       "Grade 1-12 All subjects", "University course tutor", "Entrance Exam Prep (6,8,12)", "Exit Exam Prep",
       "Special Training: NGOs/Companies", "Consultancy", "IELTS / TOEFL / GAT / SAT Prep", "Full Stack Development",
       "Digital Marketing", "Content Creation", "Video Editing", "ICT Training", "Website & Software Development",
       "Forex Trading", "Motion Graphics", "Graphics Design", "Scholarship & Research", "Language Training",
-      "Quran Tejwid & Hifz"
+      "Quran Tejwid & Hifz", "Goethe German Language Exam"
     ];
 
-    // Render services grid
+    // Hero Slider
+    const slides = document.querySelectorAll('.slide-bg');
+    let slideIndex = 0;
+    setInterval(() => {
+      slides[slideIndex].classList.remove('active');
+      slideIndex = (slideIndex + 1) % slides.length;
+      slides[slideIndex].classList.add('active');
+    }, 5000);
+
+    async function apiCall(endpoint, method = 'GET', body = null) {
+      const headers = { 'Content-Type': 'application/json' };
+      if (currentUser?.token) headers['Authorization'] = `Bearer ${currentUser.token}`;
+      const res = await fetch(`${API_URL}${endpoint}`, {
+        method,
+        headers,
+        body: body ? JSON.stringify(body) : null
+      });
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    }
+
     function renderServices() {
       const grid = document.getElementById('servicesGrid');
       if (!grid) return;
@@ -275,105 +302,120 @@
       });
     }
 
-    // Open service modal
     async function openServiceModal(serviceName) {
-      if (!currentUser) { alert('Please login first'); showAuthModal('reg'); return; }
+      if (!currentUser) { alert('Please login first'); showAuthModal('login'); return; }
       document.getElementById('serviceModalTitle').innerText = serviceName;
       const bodyDiv = document.getElementById('serviceModalBody');
       bodyDiv.innerHTML = '<div class="text-center py-4"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
       document.getElementById('serviceModal').classList.remove('hidden');
       document.getElementById('serviceModal').style.display = 'flex';
 
-      // Get user's previous submissions for this service
-      const allSubs = getSubmissions();
-      const mySubs = allSubs.filter(s => s.userEmail === currentUser.email && s.service === serviceName);
-      let subsHtml = '<h4 class="font-bold text-lg mt-4">📝 Your Submissions</h4><div class="space-y-2">';
-      if (mySubs.length === 0) subsHtml += '<p class="text-gray-500 text-sm">No submissions yet.</p>';
-      else {
-        mySubs.slice().reverse().forEach(sub => {
-          subsHtml += `<div class="border-l-4 border-blue-300 bg-gray-50 p-2 rounded"><strong>${sub.title}</strong><br><span class="text-xs">${new Date(sub.date).toLocaleString()}</span><br>${sub.description.substring(0,100)}</div>`;
-        });
-      }
-      subsHtml += '</div>';
-
-      const formHtml = `
-        <div class="border-t pt-4 mt-4">
-          <h4 class="font-bold text-lg"><i class="fas fa-upload text-blue-600"></i> Submit Assignment / Quiz / Project</h4>
-          <form id="submitWorkForm" class="space-y-3 mt-2">
-            <input type="text" id="subTitle" placeholder="Title" class="w-full border p-2 rounded" required>
-            <textarea id="subDesc" rows="2" placeholder="Description" class="w-full border p-2 rounded"></textarea>
-            <input type="file" id="subFile" class="w-full border p-2 rounded">
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Submit Work</button>
-          </form>
-        </div>
-      `;
-      bodyDiv.innerHTML = `<div class="mb-4"><i class="fas fa-download text-green-600"></i> <strong>Resources:</strong> Admins will upload materials soon. Stay tuned.</div>` + subsHtml + formHtml;
-
-      const form = document.getElementById('submitWorkForm');
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const title = document.getElementById('subTitle').value;
-        const description = document.getElementById('subDesc').value;
-        const file = document.getElementById('subFile').files[0];
-        let fileData = null;
-        if (file) {
-          const reader = new FileReader();
-          fileData = await new Promise(resolve => { reader.onload = () => resolve(reader.result); reader.readAsDataURL(file); });
+      try {
+        const submissions = await apiCall('/api/my-submissions');
+        const mySubs = submissions.filter(s => s.service_name === serviceName);
+        let subsHtml = '<h4 class="font-bold text-lg mt-4">📝 Your Submissions</h4><div class="space-y-2">';
+        if (mySubs.length === 0) subsHtml += '<p class="text-gray-500 text-sm">No submissions yet.</p>';
+        else {
+          mySubs.slice().reverse().forEach(sub => {
+            subsHtml += `<div class="border-l-4 border-blue-300 bg-gray-50 p-2 rounded"><strong>${sub.title}</strong><br><span class="text-xs">${new Date(sub.created_at).toLocaleString()}</span><br>${sub.description?.substring(0,100) || ''}</div>`;
+          });
         }
-        const newSub = {
-          userEmail: currentUser.email,
-          userName: currentUser.name,
-          service: serviceName,
-          title, description, fileData,
-          date: new Date().toISOString()
-        };
-        const subs = getSubmissions();
-        subs.push(newSub);
-        saveSubmissions(subs);
-        notifyFounder(`New Submission: ${serviceName}`, `Student: ${currentUser.name} (${currentUser.email})\nTitle: ${title}\nDescription: ${description}`);
-        alert('Submission saved! Founder notified.');
-        openServiceModal(serviceName);
-      });
+        subsHtml += '</div>';
+
+        const formHtml = `
+          <div class="border-t pt-4 mt-4">
+            <h4 class="font-bold text-lg"><i class="fas fa-upload text-blue-600"></i> Submit Assignment / Quiz / Project</h4>
+            <form id="submitWorkForm" class="space-y-3 mt-2">
+              <input type="text" id="subTitle" placeholder="Title" class="w-full border p-2 rounded" required>
+              <textarea id="subDesc" rows="2" placeholder="Description" class="w-full border p-2 rounded"></textarea>
+              <input type="file" id="subFile" class="w-full border p-2 rounded">
+              <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Submit Work</button>
+            </form>
+          </div>
+        `;
+        bodyDiv.innerHTML = `<div class="mb-4"><i class="fas fa-download text-green-600"></i> <strong>Resources:</strong> Admins will upload materials soon. Stay tuned.</div>` + subsHtml + formHtml;
+
+        document.getElementById('submitWorkForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const title = document.getElementById('subTitle').value;
+          const description = document.getElementById('subDesc').value;
+          const file = document.getElementById('subFile').files[0];
+          let fileData = null;
+          if (file) {
+            const reader = new FileReader();
+            fileData = await new Promise(resolve => { reader.onload = () => resolve(reader.result); reader.readAsDataURL(file); });
+          }
+          await apiCall('/api/submit', 'POST', { service_name: serviceName, title, description, file_data: fileData });
+          alert('Submission saved! Founder notified.');
+          openServiceModal(serviceName);
+        });
+      } catch (err) {
+        bodyDiv.innerHTML = `<p class="text-red-500">Error loading: ${err.message}</p>`;
+      }
     }
 
-    // Auth functions
-    function showAuthModal(type) {
-      document.getElementById('authModalTitle').innerText = type === 'reg' ? 'Create Your Profile' : 'Login to Your Account';
-      document.getElementById('regForm').classList.toggle('hidden', type !== 'reg');
-      document.getElementById('loginForm').classList.toggle('hidden', type !== 'login');
-      document.getElementById('authModal').classList.remove('hidden');
-      document.getElementById('authModal').style.display = 'flex';
-    }
-
-    document.getElementById('registerBtn').onclick = () => {
+    // Registration with verification
+    document.getElementById('registerBtn').onclick = async () => {
       const name = document.getElementById('regName').value.trim();
       const email = document.getElementById('regEmail').value.trim();
       const selected_service = document.getElementById('serviceSelect').value;
       const grade_level = document.getElementById('gradeSelect').value;
       if (!name || !email) { alert('Name and email required'); return; }
-      let users = getUsers();
-      if (users.find(u => u.email === email)) { alert('Email already registered. Please login.'); return; }
-      const newUser = { name, email, selected_service, grade_level, role: 'learner', registeredAt: new Date().toISOString() };
-      users.push(newUser);
-      saveUsers(users);
-      currentUser = { ...newUser, token: 'dummy' };
-      localStorage.setItem('brightpath_current_user', JSON.stringify(currentUser));
-      notifyFounder('New Registration', `Name: ${name}\nEmail: ${email}\nProgram: ${selected_service}\nGrade: ${grade_level || 'N/A'}`);
-      alert('Registration successful! You are now logged in.');
-      updateUI();
-      closeModal('authModal');
+      try {
+        await apiCall('/api/register', 'POST', { name, email, selected_service, grade_level });
+        pendingEmail = email;
+        document.getElementById('regForm').classList.add('hidden');
+        document.getElementById('verifyForm').classList.remove('hidden');
+        alert('Verification code sent to your email. Please check your inbox (spam folder too).');
+      } catch (err) { alert('Registration error: ' + err.message); }
     };
 
-    document.getElementById('loginSubmitBtn').onclick = () => {
-      const email = document.getElementById('loginEmail').value.trim();
-      const users = getUsers();
-      const user = users.find(u => u.email === email);
-      if (!user) { alert('User not found. Please register first.'); return; }
-      currentUser = { ...user, token: 'dummy' };
-      localStorage.setItem('brightpath_current_user', JSON.stringify(currentUser));
-      updateUI();
-      closeModal('authModal');
+    document.getElementById('verifyBtn').onclick = async () => {
+      const code = document.getElementById('verificationCode').value.trim();
+      if (!code) { alert('Enter verification code'); return; }
+      try {
+        const data = await apiCall('/api/verify', 'POST', { email: pendingEmail, code });
+        currentUser = { ...data.user, token: data.token };
+        localStorage.setItem('brightpath_user', JSON.stringify(currentUser));
+        updateUI();
+        closeModal('authModal');
+        alert('Email verified! You are now logged in.');
+      } catch (err) { alert('Verification failed: ' + err.message); }
     };
+
+    document.getElementById('resendCodeBtn').onclick = async () => {
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const selected_service = document.getElementById('serviceSelect').value;
+      const grade_level = document.getElementById('gradeSelect').value;
+      if (!name || !email) return;
+      try {
+        await apiCall('/api/register', 'POST', { name, email, selected_service, grade_level });
+        alert('New verification code sent.');
+      } catch (err) { alert('Error: ' + err.message); }
+    };
+
+    // Login
+    document.getElementById('loginSubmitBtn').onclick = async () => {
+      const email = document.getElementById('loginEmail').value.trim();
+      if (!email) { alert('Enter your email'); return; }
+      try {
+        const data = await apiCall('/api/login', 'POST', { email });
+        currentUser = { ...data.user, token: data.token };
+        localStorage.setItem('brightpath_user', JSON.stringify(currentUser));
+        updateUI();
+        closeModal('authModal');
+      } catch (err) { alert('Login failed: ' + err.message); }
+    };
+
+    function showAuthModal(type) {
+      document.getElementById('authModalTitle').innerText = type === 'reg' ? 'Create Your Profile' : 'Login to Your Account';
+      document.getElementById('regForm').classList.toggle('hidden', type !== 'reg');
+      document.getElementById('verifyForm').classList.add('hidden');
+      document.getElementById('loginForm').classList.toggle('hidden', type !== 'login');
+      document.getElementById('authModal').classList.remove('hidden');
+      document.getElementById('authModal').style.display = 'flex';
+    }
 
     document.getElementById('switchToLogin').onclick = () => showAuthModal('login');
     document.getElementById('switchToReg').onclick = () => showAuthModal('reg');
@@ -393,59 +435,64 @@
 
     document.getElementById('logoutBtn').onclick = () => {
       currentUser = null;
-      localStorage.removeItem('brightpath_current_user');
+      localStorage.removeItem('brightpath_user');
       updateUI();
       location.reload();
     };
     document.getElementById('loginBtn').onclick = () => showAuthModal('reg');
     document.getElementById('registerHeroBtn').onclick = () => showAuthModal('reg');
+    document.getElementById('viewMySubmissionsBtn').onclick = async () => {
+      if (!currentUser) { alert('Please login first'); return; }
+      try {
+        const subs = await apiCall('/api/my-submissions');
+        if (subs.length === 0) alert('You have no submissions yet.');
+        else {
+          let msg = 'Your Submissions:\n';
+          subs.forEach(s => msg += `\n${s.service_name}: ${s.title} (${new Date(s.created_at).toLocaleDateString()})`);
+          alert(msg);
+        }
+      } catch (err) { alert('Error loading submissions'); }
+    };
 
     // Admin panel
-    document.getElementById('adminBtn').onclick = () => {
+    document.getElementById('adminBtn').onclick = async () => {
       const pwd = prompt('Enter admin password:');
       if (pwd !== 'admin123') { alert('Wrong password'); return; }
-      const users = getUsers();
-      const submissions = getSubmissions();
-      let html = `<div class="fixed inset-0 bg-black bg-opacity-80 z-[200] flex items-center justify-center p-4"><div class="bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-y-auto p-6"><div class="flex justify-between"><h2 class="text-2xl font-bold">Admin Dashboard</h2><button id="closeAdminDash" class="text-2xl">&times;</button></div>
-      <h3 class="font-bold mt-4 text-lg">Registered Users (${users.length})</h3><div class="grid grid-cols-1 gap-2 max-h-60 overflow-y-auto">${users.map(u => `<div class="border p-2 rounded">${u.name} (${u.email}) - ${u.selected_service || 'N/A'} - Grade: ${u.grade_level || '-'}</div>`).join('')}</div>
-      <h3 class="font-bold mt-4 text-lg">All Submissions (${submissions.length})</h3><div class="space-y-2 max-h-60 overflow-y-auto">${submissions.map(s => `<div class="border p-2 rounded"><strong>${s.userName}</strong> - ${s.service}<br>${s.title}<br>${s.description.substring(0,100)}<br><span class="text-xs text-gray-500">${new Date(s.date).toLocaleString()}</span></div>`).join('')}</div>
-      </div></div>`;
-      document.body.insertAdjacentHTML('beforeend', html);
-      document.getElementById('closeAdminDash').onclick = () => document.querySelector('.fixed.inset-0.bg-black.bg-opacity-80').remove();
+      try {
+        const loginRes = await fetch(`${API_URL}/api/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: 'admin@brightpath.com' })
+        });
+        const adminData = await loginRes.json();
+        const adminToken = adminData.token;
+        const usersRes = await fetch(`${API_URL}/api/admin/users`, {
+          headers: { 'Authorization': `Bearer ${adminToken}` }
+        });
+        const users = await usersRes.json();
+        const subsRes = await fetch(`${API_URL}/api/admin/submissions`, {
+          headers: { 'Authorization': `Bearer ${adminToken}` }
+        });
+        const submissions = await subsRes.json();
+        let html = `<div class="fixed inset-0 bg-black bg-opacity-80 z-[200] flex items-center justify-center p-4"><div class="bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-y-auto p-6"><div class="flex justify-between"><h2 class="text-2xl font-bold">Admin Dashboard</h2><button id="closeAdminDash" class="text-2xl">&times;</button></div>
+        <h3 class="font-bold mt-4 text-lg">Registered Users (${users.length})</h3><div class="grid grid-cols-1 gap-2 max-h-60 overflow-y-auto">${users.map(u => `<div class="border p-2 rounded">${u.name} (${u.email}) - ${u.selected_service || 'N/A'} - Grade: ${u.grade_level || '-'} - Verified: ${u.verified ? '✅' : '❌'}</div>`).join('')}</div>
+        <h3 class="font-bold mt-4 text-lg">All Submissions (${submissions.length})</h3><div class="space-y-2 max-h-60 overflow-y-auto">${submissions.map(s => `<div class="border p-2 rounded"><strong>${s.user_name}</strong> - ${s.service_name}<br>${s.title}<br>${s.description?.substring(0,100) || ''}<br><span class="text-xs text-gray-500">${new Date(s.created_at).toLocaleString()}</span></div>`).join('')}</div>
+        </div></div>`;
+        document.body.insertAdjacentHTML('beforeend', html);
+        document.getElementById('closeAdminDash').onclick = () => document.querySelector('.fixed.inset-0.bg-black.bg-opacity-80').remove();
+      } catch (err) { alert('Admin error: ' + err.message); }
     };
 
-    // View My Submissions button
-    document.getElementById('viewMySubmissionsBtn').onclick = () => {
-      if (!currentUser) { alert('Please login first'); return; }
-      const allSubs = getSubmissions();
-      const mySubs = allSubs.filter(s => s.userEmail === currentUser.email);
-      if (mySubs.length === 0) alert('You have no submissions yet.');
-      else {
-        let msg = 'Your Submissions:\n';
-        mySubs.forEach(s => msg += `\n${s.service}: ${s.title} (${new Date(s.date).toLocaleDateString()})`);
-        alert(msg);
-      }
-    };
-
-    // Modal close helpers
     function closeModal(id) {
       const el = document.getElementById(id);
       if (el) { el.classList.add('hidden'); el.style.display = 'none'; }
     }
     document.getElementById('closeAuthModal').onclick = () => closeModal('authModal');
     document.getElementById('closeServiceModal').onclick = () => closeModal('serviceModal');
-    window.onclick = (e) => {
-      if (e.target.classList.contains('modal')) closeModal(e.target.id);
-    };
+    window.onclick = (e) => { if (e.target.classList.contains('modal')) closeModal(e.target.id); };
+    document.getElementById('mobileMenuBtn').onclick = () => { document.getElementById('mobileMenu').classList.toggle('hidden'); };
 
-    // Mobile menu toggle
-    document.getElementById('mobileMenuBtn').onclick = () => {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('hidden');
-    };
-
-    // Restore session
-    const savedUser = localStorage.getItem('brightpath_current_user');
+    const savedUser = localStorage.getItem('brightpath_user');
     if (savedUser) {
       currentUser = JSON.parse(savedUser);
       updateUI();
