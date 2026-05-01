@@ -41,7 +41,7 @@ db.serialize(() => {
     FOREIGN KEY(user_id) REFERENCES users(id)
   )`);
 
-  // Create admin user if not exists (password: admin123)
+  // Create admin user if not exists
   db.get(`SELECT * FROM users WHERE email = 'admin@brightpath.com'`, (err, row) => {
     if (!row) {
       const hashed = bcrypt.hashSync('admin123', 10);
@@ -59,7 +59,7 @@ if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
     auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS }
   });
 } else {
-  // Fallback – logs to console (still works without real email)
+  // Fallback for testing – logs to console
   transporter = { sendMail: (mail, cb) => { console.log('📧 EMAIL WOULD BE SENT:\n', mail); cb(null, { messageId: 'fake' }); } };
 }
 
@@ -86,8 +86,6 @@ function verifyToken(req, res, next) {
 }
 
 // ---------- API Routes ----------
-
-// Register – sends verification code
 app.post('/api/register', async (req, res) => {
   const { name, email, selected_service, grade_level } = req.body;
   if (!name || !email) return res.status(400).json({ error: 'Name and email required' });
@@ -99,16 +97,13 @@ app.post('/api/register', async (req, res) => {
     db.run(`INSERT INTO users (name, email, selected_service, grade_level, verification_code) VALUES (?, ?, ?, ?, ?)`,
       [name, email, selected_service, grade_level || null, verificationCode], async function(err) {
         if (err) return res.status(500).json({ error: err.message });
-        
         await sendEmail(email, 'Verify your Bright Path account', 
           `Hello ${name},\n\nYour verification code is: ${verificationCode}\n\nEnter this code on the platform to complete your registration.\n\nIf you did not request this, please ignore.`);
-        
         res.json({ message: 'Registration pending. Check your email for verification code.', userId: this.lastID });
       });
   });
 });
 
-// Verify email code
 app.post('/api/verify', (req, res) => {
   const { email, code } = req.body;
   db.get(`SELECT * FROM users WHERE email = ? AND verification_code = ?`, [email, code], (err, user) => {
@@ -121,7 +116,6 @@ app.post('/api/verify', (req, res) => {
   });
 });
 
-// Login – only verified users
 app.post('/api/login', (req, res) => {
   const { email } = req.body;
   db.get(`SELECT * FROM users WHERE email = ?`, [email], (err, user) => {
@@ -132,7 +126,6 @@ app.post('/api/login', (req, res) => {
   });
 });
 
-// Submit assignment (only verified users)
 app.post('/api/submit', verifyToken, (req, res) => {
   const { service_name, title, description, file_data } = req.body;
   db.run(`INSERT INTO submissions (user_id, service_name, title, description, file_data) VALUES (?, ?, ?, ?, ?)`,
@@ -150,7 +143,6 @@ app.get('/api/my-submissions', verifyToken, (req, res) => {
   });
 });
 
-// Admin endpoints
 app.get('/api/admin/users', verifyToken, (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ error: 'Forbidden' });
   db.all(`SELECT id, name, email, selected_service, grade_level, verified, created_at FROM users WHERE role != 'admin'`, (err, rows) => {

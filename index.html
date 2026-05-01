@@ -14,7 +14,6 @@
     .admin-badge { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
     .nav-link { transition: color 0.2s; }
     .nav-link:hover { color: #eab308; }
-    /* Hero slider */
     .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
     .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease-in-out; z-index: 0; }
     .slide-bg.active { opacity: 1; z-index: 1; }
@@ -24,7 +23,7 @@
 </head>
 <body class="bg-gray-50">
 
-  <!-- ==================== NAVBAR ==================== -->
+  <!-- NAVBAR -->
   <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
       <div class="flex items-center space-x-2">
@@ -60,7 +59,7 @@
     </div>
   </nav>
 
-  <!-- ==================== HERO SECTION WITH SLIDER ==================== -->
+  <!-- HERO SECTION WITH SLIDER -->
   <section id="home" class="relative h-[85vh] text-white flex items-center justify-center">
     <div class="hero-slider">
       <div class="slide-bg active" style="background-image: url('https://i.ibb.co/JW2T32jR/photo-2-2026-04-17-21-33-56.jpg');"></div>
@@ -83,7 +82,7 @@
     </div>
   </section>
 
-  <!-- ==================== FOUNDER SECTION ==================== -->
+  <!-- FOUNDER -->
   <section class="py-12 bg-white">
     <div class="container mx-auto px-4 text-center max-w-3xl">
       <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg">
@@ -98,7 +97,7 @@
     </div>
   </section>
 
-  <!-- ==================== ABOUT (DETAILED FULL PAGE) ==================== -->
+  <!-- ABOUT DETAILED -->
   <section id="about-full" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4 max-w-4xl">
       <h2 class="text-3xl font-bold text-center text-indigo-800 mb-6">About Bright Path Education Hub</h2>
@@ -111,7 +110,7 @@
     </div>
   </section>
 
-  <!-- ==================== VISION & MISSION (DETAILED) ==================== -->
+  <!-- VISION & MISSION -->
   <section id="vision-mission" class="py-16 bg-white">
     <div class="container mx-auto px-4 grid md:grid-cols-2 gap-8 max-w-5xl">
       <div class="bg-indigo-50 p-6 rounded-2xl shadow">
@@ -129,7 +128,7 @@
     </div>
   </section>
 
-  <!-- ==================== GOALS & VALUES (DETAILED) ==================== -->
+  <!-- GOALS & VALUES -->
   <section id="goals-values" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4 grid md:grid-cols-2 gap-8 max-w-5xl">
       <div class="bg-white p-6 rounded-2xl shadow">
@@ -159,7 +158,7 @@
     </div>
   </section>
 
-  <!-- ==================== COMPREHENSIVE SERVICES (with GOETHE) ==================== -->
+  <!-- SERVICES GRID (INCLUDES GOETHE) -->
   <section id="services-detailed" class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold text-center mb-4">Our Comprehensive Services</h2>
@@ -168,7 +167,7 @@
     </div>
   </section>
 
-  <!-- ==================== RESOURCES SECTION ==================== -->
+  <!-- RESOURCES SECTION -->
   <section id="resources" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-4">Learning Resources & Submissions</h2>
@@ -177,7 +176,7 @@
     </div>
   </section>
 
-  <!-- ==================== CONTACT SECTION ==================== -->
+  <!-- CONTACT SECTION -->
   <section id="contact" class="py-16 bg-gray-900 text-white">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
@@ -198,13 +197,11 @@
     <p>© 2026 Bright Path Education Hub — Empowering futures. 📞 +251911870215</p>
   </footer>
 
-  <!-- ==================== MODALS ==================== -->
-  <!-- Auth Modal (Registration + Login + Verification) -->
+  <!-- MODALS -->
   <div id="authModal" class="modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 relative">
       <button id="closeAuthModal" class="absolute top-3 right-5 text-2xl text-gray-600">&times;</button>
       <h2 id="authModalTitle" class="text-2xl font-bold mb-4">Join Bright Path</h2>
-      <!-- Registration Form -->
       <div id="regForm">
         <input type="text" id="regName" placeholder="Full Name" class="w-full border p-2 rounded mb-3" required>
         <input type="email" id="regEmail" placeholder="Email Address" class="w-full border p-2 rounded mb-3" required>
@@ -226,14 +223,12 @@
         <p class="text-center text-sm">Or register via Google Form:</p>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUDz5Ue3ip34oibjRUkV1H1IxRcT2VPW4tVHnVxnXWHZuM0w/viewform?usp=publish-editor" target="_blank" class="block text-center bg-red-500 text-white py-2 rounded mt-2">Open Google Form</a>
       </div>
-      <!-- Verification Form -->
       <div id="verifyForm" class="hidden">
         <p class="mb-2">A verification code has been sent to your email. Enter it below:</p>
         <input type="text" id="verificationCode" placeholder="6-digit code" class="w-full border p-2 rounded mb-3">
         <button id="verifyBtn" class="bg-green-600 text-white w-full py-2 rounded">Verify & Complete Registration</button>
         <p class="text-center text-sm mt-3"><button id="resendCodeBtn" class="text-indigo-600 underline">Resend code</button></p>
       </div>
-      <!-- Login Form -->
       <div id="loginForm" class="hidden">
         <input type="email" id="loginEmail" placeholder="Your registered email" class="w-full border p-2 rounded mb-3">
         <button id="loginSubmitBtn" class="bg-green-600 text-white w-full py-2 rounded">Login</button>
@@ -242,7 +237,6 @@
     </div>
   </div>
 
-  <!-- Service Modal -->
   <div id="serviceModal" class="modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 p-4">
     <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-6 relative">
       <button id="closeServiceModal" class="absolute top-3 right-5 text-3xl text-gray-600">&times;</button>
@@ -251,15 +245,12 @@
     </div>
   </div>
 
-  <!-- Admin Button -->
   <button id="adminBtn" class="admin-badge bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-full shadow-lg"><i class="fas fa-user-shield"></i> Admin</button>
 
   <script>
-    const API_URL = '';
+    const API_URL = '';  // relative URLs will work because frontend and backend are on same origin
     let currentUser = null;
     let pendingEmail = null;
-
-    // Services including Goethe
     const servicesList = [
       "Grade 1-12 All subjects", "University course tutor", "Entrance Exam Prep (6,8,12)", "Exit Exam Prep",
       "Special Training: NGOs/Companies", "Consultancy", "IELTS / TOEFL / GAT / SAT Prep", "Full Stack Development",
@@ -268,7 +259,7 @@
       "Quran Tejwid & Hifz", "Goethe German Language Exam"
     ];
 
-    // Hero Slider
+    // Hero slider
     const slides = document.querySelectorAll('.slide-bg');
     let slideIndex = 0;
     setInterval(() => {
@@ -280,12 +271,11 @@
     async function apiCall(endpoint, method = 'GET', body = null) {
       const headers = { 'Content-Type': 'application/json' };
       if (currentUser?.token) headers['Authorization'] = `Bearer ${currentUser.token}`;
-      const res = await fetch(`${API_URL}${endpoint}`, {
-        method,
-        headers,
-        body: body ? JSON.stringify(body) : null
-      });
-      if (!res.ok) throw new Error(await res.text());
+      const res = await fetch(`${API_URL}${endpoint}`, { method, headers, body: body ? JSON.stringify(body) : null });
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(errorText || 'Request failed');
+      }
       return res.json();
     }
 
@@ -309,7 +299,6 @@
       bodyDiv.innerHTML = '<div class="text-center py-4"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
       document.getElementById('serviceModal').classList.remove('hidden');
       document.getElementById('serviceModal').style.display = 'flex';
-
       try {
         const submissions = await apiCall('/api/my-submissions');
         const mySubs = submissions.filter(s => s.service_name === serviceName);
@@ -321,7 +310,6 @@
           });
         }
         subsHtml += '</div>';
-
         const formHtml = `
           <div class="border-t pt-4 mt-4">
             <h4 class="font-bold text-lg"><i class="fas fa-upload text-blue-600"></i> Submit Assignment / Quiz / Project</h4>
@@ -334,7 +322,6 @@
           </div>
         `;
         bodyDiv.innerHTML = `<div class="mb-4"><i class="fas fa-download text-green-600"></i> <strong>Resources:</strong> Admins will upload materials soon. Stay tuned.</div>` + subsHtml + formHtml;
-
         document.getElementById('submitWorkForm').addEventListener('submit', async (e) => {
           e.preventDefault();
           const title = document.getElementById('subTitle').value;
@@ -350,11 +337,11 @@
           openServiceModal(serviceName);
         });
       } catch (err) {
-        bodyDiv.innerHTML = `<p class="text-red-500">Error loading: ${err.message}</p>`;
+        bodyDiv.innerHTML = `<p class="text-red-500">Error: ${err.message}</p>`;
       }
     }
 
-    // Registration with verification
+    // Registration flow
     document.getElementById('registerBtn').onclick = async () => {
       const name = document.getElementById('regName').value.trim();
       const email = document.getElementById('regEmail').value.trim();
@@ -367,7 +354,9 @@
         document.getElementById('regForm').classList.add('hidden');
         document.getElementById('verifyForm').classList.remove('hidden');
         alert('Verification code sent to your email. Please check your inbox (spam folder too).');
-      } catch (err) { alert('Registration error: ' + err.message); }
+      } catch (err) {
+        alert('Registration error: ' + err.message);
+      }
     };
 
     document.getElementById('verifyBtn').onclick = async () => {
@@ -380,7 +369,9 @@
         updateUI();
         closeModal('authModal');
         alert('Email verified! You are now logged in.');
-      } catch (err) { alert('Verification failed: ' + err.message); }
+      } catch (err) {
+        alert('Verification failed: ' + err.message);
+      }
     };
 
     document.getElementById('resendCodeBtn').onclick = async () => {
@@ -392,10 +383,11 @@
       try {
         await apiCall('/api/register', 'POST', { name, email, selected_service, grade_level });
         alert('New verification code sent.');
-      } catch (err) { alert('Error: ' + err.message); }
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
     };
 
-    // Login
     document.getElementById('loginSubmitBtn').onclick = async () => {
       const email = document.getElementById('loginEmail').value.trim();
       if (!email) { alert('Enter your email'); return; }
@@ -405,7 +397,9 @@
         localStorage.setItem('brightpath_user', JSON.stringify(currentUser));
         updateUI();
         closeModal('authModal');
-      } catch (err) { alert('Login failed: ' + err.message); }
+      } catch (err) {
+        alert('Login failed: ' + err.message);
+      }
     };
 
     function showAuthModal(type) {
@@ -451,7 +445,9 @@
           subs.forEach(s => msg += `\n${s.service_name}: ${s.title} (${new Date(s.created_at).toLocaleDateString()})`);
           alert(msg);
         }
-      } catch (err) { alert('Error loading submissions'); }
+      } catch (err) {
+        alert('Error loading submissions');
+      }
     };
 
     // Admin panel
@@ -459,6 +455,7 @@
       const pwd = prompt('Enter admin password:');
       if (pwd !== 'admin123') { alert('Wrong password'); return; }
       try {
+        // First get admin token
         const loginRes = await fetch(`${API_URL}/api/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -480,7 +477,9 @@
         </div></div>`;
         document.body.insertAdjacentHTML('beforeend', html);
         document.getElementById('closeAdminDash').onclick = () => document.querySelector('.fixed.inset-0.bg-black.bg-opacity-80').remove();
-      } catch (err) { alert('Admin error: ' + err.message); }
+      } catch (err) {
+        alert('Admin error: ' + err.message);
+      }
     };
 
     function closeModal(id) {
