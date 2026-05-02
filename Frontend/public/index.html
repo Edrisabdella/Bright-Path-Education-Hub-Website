@@ -10,7 +10,7 @@
     body { font-family: 'Inter', system-ui, sans-serif; scroll-behavior: smooth; }
     .service-card, .section-card { transition: all 0.3s; background: white; border-radius: 1.25rem; }
     .service-card:hover, .section-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.15); }
-    .modal { backdrop-filter: blur(4px); }
+    .modal { -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
     .admin-badge { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
     .nav-link { transition: color 0.2s; }
     .nav-link:hover { color: #eab308; }
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="md:hidden">
-        <button id="mobileMenuBtn" class="text-2xl"><i class="fas fa-bars"></i></button>
+        <button id="mobileMenuBtn" class="text-2xl" type="button" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
       </div>
     </div>
     <div id="mobileMenu" class="hidden md:hidden bg-white pb-4 px-4 flex flex-col space-y-2 border-t">
@@ -510,5 +510,183 @@
     }
     renderServices();
   </script>
+</body>
+</html>
+            const verifyForm = document.getElementById('verifyForm');
+            const loginForm = document.getElementById('loginForm');
+            const modalTitle = document.getElementById('authModalTitle');
+            
+            regForm.classList.add('hidden');
+            verifyForm.classList.add('hidden');
+            loginForm.classList.add('hidden');
+            
+            if (type === 'reg') {
+                modalTitle.innerText = 'Create Your Profile';
+                regForm.classList.remove('hidden');
+            } else if (type === 'verify') {
+                modalTitle.innerText = 'Verify Your Email';
+                verifyForm.classList.remove('hidden');
+            } else {
+                modalTitle.innerText = 'Login to Your Account';
+                loginForm.classList.remove('hidden');
+            }
+            modal.classList.remove('hidden');
+        }
+        
+        function closeModal() {
+            document.getElementById('authModal').classList.add('hidden');
+        }
+
+        // Login handler
+        async function handleLogin() {
+            const email = document.getElementById('loginEmail').value.trim();
+            if (!email) {
+                alert('Please enter your email');
+                return;
+            }
+            try {
+                const data = await apiCall('/api/login', 'POST', { email });
+                currentUser = { ...data.user, token: data.token };
+                localStorage.setItem('brightpath_user', JSON.stringify(currentUser));
+                updateUI();
+                closeModal();
+                alert(`Welcome back, ${currentUser.name}!`);
+                window.location.reload();
+            } catch (error) {
+                alert('Login failed: ' + error.message);
+            }
+        }
+
+        // Registration handler
+        async function handleRegister() {
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            if (!name || !email) {
+                alert('Please fill in all fields');
+                return;
+            }
+            try {
+                await apiCall('/api/register', 'POST', { name, email });
+                pendingEmail = email;
+                showAuthModal('verify');
+                alert('Verification code sent! Check your email or console logs.');
+            } catch (error) {
+                alert('Registration error: ' + error.message);
+            }
+        }
+
+        // Verification handler
+        async function handleVerify() {
+            const code = document.getElementById('verificationCode').value.trim();
+            if (!code) {
+                alert('Please enter verification code');
+                return;
+            }
+            try {
+                const data = await apiCall('/api/verify', 'POST', { email: pendingEmail, code });
+                currentUser = { ...data.user, token: data.token };
+                localStorage.setItem('brightpath_user', JSON.stringify(currentUser));
+                updateUI();
+                closeModal();
+                alert('Email verified! You are now logged in.');
+                window.location.reload();
+            } catch (error) {
+                alert('Verification failed: ' + error.message);
+            }
+        }
+
+        // Update UI based on login state
+        function updateUI() {
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const userDisplay = document.getElementById('userDisplay');
+            if (currentUser) {
+                loginBtn.classList.add('hidden');
+                logoutBtn.classList.remove('hidden');
+                userDisplay.classList.remove('hidden');
+                userDisplay.innerText = `👋 ${currentUser.name}`;
+            } else {
+                loginBtn.classList.remove('hidden');
+                logoutBtn.classList.add('hidden');
+                userDisplay.classList.add('hidden');
+            }
+        }
+
+        // Logout
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('brightpath_user');
+            updateUI();
+            window.location.reload();
+        }
+
+        // Initialize app on page load
+        window.onload = () => {
+            const storedUser = localStorage.getItem('brightpath_user');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                updateUI();
+            }
+            // Setup event listeners
+            document.getElementById('loginBtn').onclick = () => showAuthModal('login');
+            document.getElementById('registerHeroBtn').onclick = () => showAuthModal('reg');
+            document.getElementById('closeAuthModal').onclick = closeModal;
+            document.getElementById('loginSubmitBtn').onclick = handleLogin;
+            document.getElementById('registerBtn').onclick = handleRegister;
+            document.getElementById('verifyBtn').onclick = handleVerify;
+            document.getElementById('logoutBtn').onclick = handleLogout;
+            document.getElementById('switchToLogin').onclick = () => showAuthModal('login');
+            document.getElementById('switchToReg').onclick = () => showAuthModal('reg');
+        };
+    </script>
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+    <div class="min-h-screen flex flex-col">
+        <!-- Navigation -->
+        <nav class="bg-white shadow-md p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="text-2xl font-bold text-indigo-800">Bright Path Education Hub</div>
+                <div id="authNav">
+                    <button id="loginBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Login</button>
+                    <button id="logoutBtn" class="hidden bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Logout</button>
+                    <span id="userDisplay" class="ml-4 text-gray-700 font-semibold hidden"></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="flex-grow flex items-center justify-center">
+            <div class="text-center px-4">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-800 mb-4">Bright Path Education Hub</h1>
+                <p class="text-xl text-gray-600 mb-8">Your gateway to quality education</p>
+                <button id="registerHeroBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg transition">Get Started</button>
+            </div>
+        </div>
+
+        <!-- Auth Modal -->
+        <div id="authModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-white rounded-xl max-w-md w-full p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 id="authModalTitle" class="text-2xl font-bold text-gray-800">Join Bright Path</h2>
+                    <button id="closeAuthModal" class="text-gray-500 hover:text-gray-700">&times;</button>
+                </div>
+                <div id="regForm" class="space-y-4">
+                    <input type="text" id="regName" placeholder="Full Name" class="w-full border rounded-lg p-2">
+                    <input type="email" id="regEmail" placeholder="Email Address" class="w-full border rounded-lg p-2">
+                    <button id="registerBtn" class="bg-indigo-600 text-white w-full py-2 rounded-lg">Register</button>
+                    <p class="text-center text-sm">Already have an account? <button id="switchToLogin" class="text-indigo-600 underline">Login</button></p>
+                </div>
+                <div id="verifyForm" class="space-y-4 hidden">
+                    <input type="text" id="verificationCode" placeholder="6-digit code" class="w-full border rounded-lg p-2">
+                    <button id="verifyBtn" class="bg-green-600 text-white w-full py-2 rounded-lg">Verify</button>
+                </div>
+                <div id="loginForm" class="space-y-4 hidden">
+                    <input type="email" id="loginEmail" placeholder="Your Email" class="w-full border rounded-lg p-2">
+                    <button id="loginSubmitBtn" class="bg-green-600 text-white w-full py-2 rounded-lg">Login</button>
+                    <p class="text-center text-sm">New user? <button id="switchToReg" class="text-indigo-600 underline">Create account</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
