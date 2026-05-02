@@ -10,7 +10,7 @@
     body { font-family: 'Inter', system-ui, sans-serif; scroll-behavior: smooth; }
     .service-card, .section-card { transition: all 0.3s; background: white; border-radius: 1.25rem; }
     .service-card:hover, .section-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.15); }
-    .modal { backdrop-filter: blur(4px); }
+    .modal { -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
     .admin-badge { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
     .nav-link { transition: color 0.2s; }
     .nav-link:hover { color: #eab308; }
@@ -23,7 +23,7 @@
 </head>
 <body class="bg-gray-50">
 
-  <!-- NAVBAR -->
+  <!-- ==================== NAVBAR ==================== -->
   <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
       <div class="flex items-center space-x-2">
@@ -59,7 +59,7 @@
     </div>
   </nav>
 
-  <!-- HERO SECTION WITH SLIDER -->
+  <!-- ==================== HERO SECTION ==================== -->
   <section id="home" class="relative h-[85vh] text-white flex items-center justify-center">
     <div class="hero-slider">
       <div class="slide-bg active" style="background-image: url('https://i.ibb.co/JW2T32jR/photo-2-2026-04-17-21-33-56.jpg');"></div>
@@ -82,7 +82,7 @@
     </div>
   </section>
 
-  <!-- FOUNDER -->
+  <!-- FOUNDER SECTION -->
   <section class="py-12 bg-white">
     <div class="container mx-auto px-4 text-center max-w-3xl">
       <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg">
@@ -97,7 +97,7 @@
     </div>
   </section>
 
-  <!-- ABOUT DETAILED -->
+  <!-- ABOUT, VISION, MISSION, GOALS, VALUES sections (same as before) -->
   <section id="about-full" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4 max-w-4xl">
       <h2 class="text-3xl font-bold text-center text-indigo-800 mb-6">About Bright Path Education Hub</h2>
@@ -110,7 +110,6 @@
     </div>
   </section>
 
-  <!-- VISION & MISSION -->
   <section id="vision-mission" class="py-16 bg-white">
     <div class="container mx-auto px-4 grid md:grid-cols-2 gap-8 max-w-5xl">
       <div class="bg-indigo-50 p-6 rounded-2xl shadow">
@@ -128,7 +127,6 @@
     </div>
   </section>
 
-  <!-- GOALS & VALUES -->
   <section id="goals-values" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4 grid md:grid-cols-2 gap-8 max-w-5xl">
       <div class="bg-white p-6 rounded-2xl shadow">
@@ -158,7 +156,7 @@
     </div>
   </section>
 
-  <!-- SERVICES GRID (INCLUDES GOETHE) -->
+  <!-- SERVICES GRID -->
   <section id="services-detailed" class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold text-center mb-4">Our Comprehensive Services</h2>
@@ -176,7 +174,7 @@
     </div>
   </section>
 
-  <!-- CONTACT SECTION -->
+  <!-- CONTACT -->
   <section id="contact" class="py-16 bg-gray-900 text-white">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
@@ -248,9 +246,10 @@
   <button id="adminBtn" class="admin-badge bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-full shadow-lg"><i class="fas fa-user-shield"></i> Admin</button>
 
   <script>
-    const API_URL = '';  // relative URLs will work because frontend and backend are on same origin
+    const API_URL = ''; // empty means relative to same origin
     let currentUser = null;
     let pendingEmail = null;
+
     const servicesList = [
       "Grade 1-12 All subjects", "University course tutor", "Entrance Exam Prep (6,8,12)", "Exit Exam Prep",
       "Special Training: NGOs/Companies", "Consultancy", "IELTS / TOEFL / GAT / SAT Prep", "Full Stack Development",
@@ -271,12 +270,26 @@
     async function apiCall(endpoint, method = 'GET', body = null) {
       const headers = { 'Content-Type': 'application/json' };
       if (currentUser?.token) headers['Authorization'] = `Bearer ${currentUser.token}`;
-      const res = await fetch(`${API_URL}${endpoint}`, { method, headers, body: body ? JSON.stringify(body) : null });
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(errorText || 'Request failed');
+      const response = await fetch(`${API_URL}${endpoint}`, {
+        method,
+        headers,
+        body: body ? JSON.stringify(body) : null
+      });
+      if (!response.ok) {
+        let errorMessage = `HTTP ${response.status}`;
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch (e) {
+          // If response is not JSON, use status text
+          errorMessage = response.statusText || 'Request failed';
+        }
+        throw new Error(errorMessage);
       }
-      return res.json();
+      // If response is 204 No Content, return empty object
+      if (response.status === 204) return {};
+      const data = await response.json();
+      return data;
     }
 
     function renderServices() {
@@ -306,7 +319,7 @@
         if (mySubs.length === 0) subsHtml += '<p class="text-gray-500 text-sm">No submissions yet.</p>';
         else {
           mySubs.slice().reverse().forEach(sub => {
-            subsHtml += `<div class="border-l-4 border-blue-300 bg-gray-50 p-2 rounded"><strong>${sub.title}</strong><br><span class="text-xs">${new Date(sub.created_at).toLocaleString()}</span><br>${sub.description?.substring(0,100) || ''}</div>`;
+            subsHtml += `<div class="border-l-4 border-blue-300 bg-gray-50 p-2 rounded"><strong>${sub.title}</strong><br><span class="text-xs">${new Date(sub.created_at).toLocaleString()}</span><br>${(sub.description || '').substring(0,100)}</div>`;
           });
         }
         subsHtml += '</div>';
@@ -341,7 +354,7 @@
       }
     }
 
-    // Registration flow
+    // Registration with verification
     document.getElementById('registerBtn').onclick = async () => {
       const name = document.getElementById('regName').value.trim();
       const email = document.getElementById('regEmail').value.trim();
@@ -455,7 +468,6 @@
       const pwd = prompt('Enter admin password:');
       if (pwd !== 'admin123') { alert('Wrong password'); return; }
       try {
-        // First get admin token
         const loginRes = await fetch(`${API_URL}/api/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -473,7 +485,7 @@
         const submissions = await subsRes.json();
         let html = `<div class="fixed inset-0 bg-black bg-opacity-80 z-[200] flex items-center justify-center p-4"><div class="bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-y-auto p-6"><div class="flex justify-between"><h2 class="text-2xl font-bold">Admin Dashboard</h2><button id="closeAdminDash" class="text-2xl">&times;</button></div>
         <h3 class="font-bold mt-4 text-lg">Registered Users (${users.length})</h3><div class="grid grid-cols-1 gap-2 max-h-60 overflow-y-auto">${users.map(u => `<div class="border p-2 rounded">${u.name} (${u.email}) - ${u.selected_service || 'N/A'} - Grade: ${u.grade_level || '-'} - Verified: ${u.verified ? '✅' : '❌'}</div>`).join('')}</div>
-        <h3 class="font-bold mt-4 text-lg">All Submissions (${submissions.length})</h3><div class="space-y-2 max-h-60 overflow-y-auto">${submissions.map(s => `<div class="border p-2 rounded"><strong>${s.user_name}</strong> - ${s.service_name}<br>${s.title}<br>${s.description?.substring(0,100) || ''}<br><span class="text-xs text-gray-500">${new Date(s.created_at).toLocaleString()}</span></div>`).join('')}</div>
+        <h3 class="font-bold mt-4 text-lg">All Submissions (${submissions.length})</h3><div class="space-y-2 max-h-60 overflow-y-auto">${submissions.map(s => `<div class="border p-2 rounded"><strong>${s.user_name}</strong> - ${s.service_name}<br>${s.title}<br>${(s.description || '').substring(0,100)}<br><span class="text-xs text-gray-500">${new Date(s.created_at).toLocaleString()}</span></div>`).join('')}</div>
         </div></div>`;
         document.body.insertAdjacentHTML('beforeend', html);
         document.getElementById('closeAdminDash').onclick = () => document.querySelector('.fixed.inset-0.bg-black.bg-opacity-80').remove();
