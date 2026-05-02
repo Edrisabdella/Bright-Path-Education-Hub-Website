@@ -1,194 +1,244 @@
-# Bright-Path-Education-Hub-Website
+# 📚 Bright Path Education Hub – Complete Platform
 
-Bright Path Education Hub is an official online and face to face tutor and training center  Services
+**Bright Path Education Hub** is a modern, full‑featured online learning platform that offers:
 
-## Bright Path Education Hub – Official Platform
+- 📘 **Tutoring** for Grade 1–12, university, and professional courses  
+- 🌍 **International exam preparation** – IELTS, TOEFL, SAT, GAT, DELF, Goethe, Duolingo English Test  
+- 💻 **Digital skills training** – Full‑stack development, digital marketing, video editing, Forex, ICT, etc.  
+- 🕌 **Quranic studies** with Tajwid and Hifz  
+- 🌐 **Online & face‑to‑face** learning options  
 
-**Learn Smarter • Achieve Higher**
+The platform includes **user authentication, course enrollment, resource sharing, tutoring session booking, assignment submissions, and an admin dashboard**.
 
-Bright Path Education Hub is a fully functional online learning platform that bridges academic tutoring, exam preparation, language training, and professional skill development. It enables learners to access resources, submit assignments/projects/quizzes, and receive feedback – all in one place.
+It is available in two variants:
 
-> **Live Demo**: Deploy this repository as a static site on Render, Vercel, or Netlify.  
-> **Admin Credentials**: `admin123` (password for admin panel)
+1. **Standalone HTML/CSS/JS version** – fully functional single‑page application (SPA) with localStorage persistence.  
+2. **Full‑stack version** – production‑ready backend (Node.js + Express + MongoDB + JWT + Cloudinary) and frontend (React + Redux Toolkit + Tailwind CSS).
 
 ---
 
-## 📚 Table of Contents
+## 🚀 Live Demo (Standalone HTML)
 
-- [Features](#-features)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Installation & Local Setup](#️-installation--local-setup)
-- [Deployment on Render](#deployment-on-render)
-- [How to Use](#how-to-use)
-  - [For Learners](#for-learners)
-  - [For Admins / Instructors](#for-admins--instructors)
-- [Data Persistence](#data-persistence)
-- [Contact & Support](#contact-support)
-- [License](#license)
+Just open the `index.html` file in any modern browser – no installation required.  
+Admin password: `admin123`
+
+---
+
+## 📁 Project Structure (Full‑Stack Version)
+
+Bright-Path-Education-Hub-Website/
+├── server/ # Backend (Node.js + Express)
+│ ├── config/ # DB, Cloudinary, email config
+│ ├── controllers/ # Business logic (auth, courses, resources, tutoring)
+│ ├── models/ # Mongoose models (User, Course, Resource, etc.)
+│ ├── routes/ # API endpoints
+│ ├── middleware/ # Auth, errorHandler, validation, rateLimiter
+│ ├── utils/ # JWT, catchAsync, AppError, email templates
+│ ├── validations/ # Express-validator schemas
+│ ├── services/ # Email, Cloudinary, payment (stripe placeholder)
+│ ├── tests/ # Unit & integration tests
+│ ├── .env # Environment variables
+│ ├── server.js # Entry point
+│ └── package.json
+│
+└── client/ # Frontend (React + Vite + Redux)
+├── public/ # Static assets (index.html, favicon, manifest)
+├── src/
+│ ├── components/ # Reusable UI (Navbar, Footer, Modals, Forms)
+│ ├── pages/ # All views (Home, About, Courses, Dashboard, etc.)
+│ ├── hooks/ # Custom hooks (useAuth, useApi, useForm)
+│ ├── context/ # React contexts (Auth, Theme, Loading)
+│ ├── redux/ # Redux store, slices, and API services
+│ ├── services/ # Axios API calls
+│ ├── utils/ # Constants, formatters, validators
+│ ├── assets/ # Images, styles, icons
+│ ├── routes/ # AppRouter.jsx
+│ ├── App.jsx
+│ ├── main.jsx
+│ └── index.css
+├── .env
+├── vite.config.js
+├── tailwind.config.js
+└── package.json
+
+text
+
+---
+
+## 🧰 Tech Stack
+
+### Backend
+
+- **Runtime**: Node.js  
+- **Framework**: Express.js  
+- **Database**: MongoDB + Mongoose ODM  
+- **Authentication**: JWT (JSON Web Tokens)  
+- **File Storage**: Cloudinary (via Multer)  
+- **Email**: Nodemailer (SMTP)  
+- **Security**: bcryptjs, express-rate-limit, helmet, cors  
+- **Validation**: express-validator  
+- **Logging**: morgan  
+
+### Frontend (full‑stack version)
+
+- **Library**: React 18  
+- **Build tool**: Vite  
+- **State Management**: Redux Toolkit  
+- **Routing**: React Router v6  
+- **Styling**: Tailwind CSS  
+- **HTTP client**: Axios  
+
+### Standalone HTML version
+
+- **HTML5 / CSS3 (Tailwind CDN)**  
+- **Vanilla JavaScript** (ES6)  
+- **localStorage** for data persistence  
 
 ---
 
 ## ✨ Features
 
-### Core Functionality
+### User Features
 
-- **User Authentication** – Learners sign up with name & email; their submissions are linked to their account.
-- **Service‑Based Resource Access** – 19+ educational services (K‑12 tutoring, entrance/exit exams, IELTS/TOEFL/SAT, programming, languages, Quran, etc.)
-- **Resource Download** – Admins upload PDFs, documents, or any files per service; learners can download them instantly.
-- **Assignment / Quiz / Project Submission** – Learners submit work with title, description, and optional file attachment.
-- **Personal Submission History** – Each learner sees only their own past submissions for every service.
-- **Admin Dashboard** – Upload resources to any service, view **all** submissions from all learners, and download attached files.
-- **Email Notification** – Every learner submission triggers a `mailto:` link to notify the hub (`nejat.mahammednur@aau.edu.et`).
-- **Responsive Design** – Works flawlessly on desktop, tablet, and mobile.
+- ✅ Register / Login with JWT (or email/password in standalone)  
+- ✅ View all courses and enroll  
+- ✅ Access learning resources (PDFs, videos)  
+- ✅ Submit assignments / projects (with file upload)  
+- ✅ Book one‑on‑one tutoring sessions  
+- ✅ View personal submissions and enrollment history  
 
-### Additional Content
+### Admin Features
 
-- Dynamic hero background slider (3 rotating images)
-- Rotating logo interchange (brand showcase)
-- Founder & director section with LinkedIn & email links
-- Social media integration (YouTube, LinkedIn, WhatsApp, Telegram)
-- Clickable phone number (`+251911870215`) for direct calls
+- ✅ View all registered users  
+- ✅ Create new courses  
+- ✅ Upload resources (files to Cloudinary)  
+- ✅ Monitor all submissions  
 
----
+### General
 
-## 🛠 Technology Stack
-
-| Layer       | Technology                                                   |
-|-------------|-------------------------------------------------------------|
-| Frontend    | HTML5, Tailwind CSS, JavaScript (ES6+)                      |
-| Icons       | Font Awesome 6                                              |
-| Storage     | **IndexedDB** (via localForage) – persists data in browser  |
-| Hosting     | Any static hosting (Render, Netlify, Vercel, GitHub Pages)  |
-| No Backend  | Fully client‑side; no server required                       |
-
-> All user data, resources, and submissions are stored locally in the learner’s browser using IndexedDB. This makes the platform zero‑cost and instantly deployable.
+- ✅ Fully responsive design (mobile, tablet, desktop)  
+- ✅ Interactive service cards with submission modals  
+- ✅ Background slideshow on hero section  
+- ✅ Email notifications to founder on new registrations & submissions  
 
 ---
 
-## 📁 Project Structure
+## ⚙️ Installation & Setup (Full‑Stack Version)
 
-bright-path-hub/
-├── server.js
-├── package.json
-├── .env
-├── database.sqlite (created automatically)
-└── public/
-    └── index.html
+### Prerequisites
 
----
+- Node.js (v16+)  
+- MongoDB (local or Atlas)  
+- Cloudinary account (for file uploads)  
+- Gmail / SMTP credentials (for email notifications)
 
-## ⚙️ Installation & Local Setup
+### 1. Clone the repository
 
-1. **Clone or download** this repository.
-2. Open the folder and double‑click `index.html` – it will run directly in your browser.
-   - No build steps, no dependencies to install.
-3. For a better experience, serve it with a local web server:
+```bash
+git clone https://github.com/yourusername/Bright-Path-Education-Hub.git
+cd Bright-Path-Education-Hub
+2. Backend setup
+bash
+cd server
+npm install
+Create a .env file in the server folder with the following variables:
 
-   ```bash
-   npx serve .
-   # or use Python: python -m http.server 8000
-   Open http://localhost:8000 and start using the platform.
+env
+PORT=5000
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/mongodb+srv://brightpatheducation:<admin***>@brightpathapp.kvip71a.mongodb.net/brightpathapp?appName=brightpathapp
+JWT_SECRET=9f3c7e6a2b8d4f1a5c0e7b9d2a6f3c8e1b4d7a9c5e2f8a1d6c3b9e7f0a2d4c6
+JWT_EXPIRE=7d
+CLOUDINARY_CLOUD_NAME=brightpathapp
+CLOUDINARY_API_KEY=admin123
+CLOUDINARY_API_SECRET=brightpathapp
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=nejat.mahammednur@aau.edu.et
+EMAIL_PASS=admin***
+CLIENT_URL=http://localhost:5173
+Start the backend server:
 
-🚀 Deployment on Render (Free Static Site)
-Render is recommended because it provides free HTTPS, continuous deployment from Git, and global CDN.
+bash
+npm run dev
+3. Frontend setup
+bash
+cd ../client
+npm install
+Create a .env file in the client folder:
 
-Step‑by‑Step
-Push the code to a GitHub repository (public or private).
+env
+VITE_API_URL=http://localhost:5000/api
+Start the development server:
 
-Log in to Render.com.
+bash
+npm run dev
+The application will open at http://localhost:5173.
 
-Click New + → Static Site.
+📡 API Endpoints (Backend)
+Method Endpoint Description Access
+POST /api/auth/register User registration Public
+POST /api/auth/login User login Public
+POST /api/auth/forgot-password Send reset email Public
+POST /api/auth/reset-password Reset password Public
+GET /api/users/profile Get current user profile Private
+PATCH /api/users/profile Update profile Private
+GET /api/users List all users (admin only) Admin
+GET /api/courses Get all published courses Public
+GET /api/courses/:id Get a single course Public
+POST /api/courses Create a course (admin/tutor) Private
+POST /api/courses/:id/enroll Enroll in a course Private
+GET /api/resources Get resources (public + user’s) Private
+POST /api/resources Upload a resource (admin/tutor) Private
+POST /api/tutoring/request Request a tutoring session Private
+GET /api/tutoring/my-sessions Get user’s sessions Private
+POST /api/uploads/image Upload an image (Cloudinary) Private
+🧪 Testing
+Unit and integration tests are placed in server/tests/.
+Run backend tests:
 
-Connect your GitHub repository.
+bash
+cd server
+npm test
+🌟 Standalone HTML Version (No Backend Required)
+If you prefer a single‑file solution that works immediately:
 
-Configure:
+Copy the complete HTML code provided in the final answer into a file named index.html.
 
-Name: bright-path-education-hub (or any)
+Open it directly in your browser.
 
-Branch: main
+Use the following demo credentials:
 
-Build Command: leave empty (or echo "no build required")
+Admin – email: admin@brightpath.com, password: admin123
 
-Publish Directory: . (root folder)
+New user – register via the modal.
 
-Click Create Static Site.
-
-In a few seconds, your live URL will be ready (e.g., <https://bright-path-education-hub.onrender.com>).
-
-No environment variables or database setup needed – everything runs client‑side.
-
-Alternative Hosting
-Netlify: Drag & drop the index.html file.
-
-Vercel: vercel --prod
-
-GitHub Pages: Push to a gh-pages branch.
-
-👥 How to Use
-For Learners
-Login / Register – Click the Login button in the navbar. Enter your full name and email address.
-
-Browse Services – Scroll to the Our Comprehensive Services section. Each card represents a subject or training area.
-
-Access Resources – Click Resources & Submit on any service card.
-
-View and download materials uploaded by admins.
-
-Submit your own assignment, quiz, or project by filling the form.
-
-Attach a file (optional) and click Submit Work.
-
-Track Your Submissions – Re‑open the same service modal to see your previous submissions listed under Your Submissions.
-
-Contact the Hub – Use the footer or contact section to call, email, or join WhatsApp/Telegram groups.
-
-For Admins / Instructors
-Open Admin Panel – Click the floating yellow Admin button at the bottom‑right corner.
-
-Enter Password – Use admin123 (case‑sensitive).
-
-Upload Resources – Select a service from the dropdown, choose a file, give it a name, and click Upload Resource.
-
-The resource becomes instantly available to all learners.
-
-View All Submissions – The admin panel shows every submission from every learner, including file attachments that can be downloaded.
-
-Manage Content – You can upload as many resources as needed; each service maintains its own list.
-
-💡 Tip: To change the admin password, edit the line if (pwd === 'admin123') in the JavaScript section of index.html.
-
-💾 Data Persistence
-IndexedDB (via localforage) stores:
-
-All uploaded resources (file name + dataURL)
-
-All learner submissions (text + optional file attachments)
-
-No external database required.
-
-Data remains in the browser even after closing or refreshing the page.
-
-Clearing browser cache / site data will erase all information. For production use with multiple users, consider a backend (but the current design is ideal for a single organization or classroom setting where each device is shared).
+All data (users, submissions) are stored in the browser’s localStorage.
+The Google Form link is available as a secondary registration option.
 
 📞 Contact & Support
-Founder & Director: Nejat Mahammednur
+Founder & CEO: Nejat Mahammednur
+📧 Email: nejat.mahammednur@aau.edu.et
+📞 Phone: +251911870215
 
-Phone / WhatsApp: +251911870215
+Social Media
 
-Email: <nejat.mahammednur@aau.edu.et>
+YouTube
 
-YouTube: Education Hub Academy
+LinkedIn
 
-LinkedIn: Nejat Mehammednur
+WhatsApp Group
 
-WhatsApp Group: Join here
-
-Telegram: Join here
-
-For technical issues or feature requests, please open an issue in this repository or contact the hub directly.
+Telegram
 
 📄 License
-This project is proprietary to Bright Path Education Hub. You may use and modify it for internal educational purposes. Redistribution or commercial resale is not permitted without explicit consent.
+This project is proprietary and intended for educational/demo purposes. For commercial use, please contact the founder.
 
-© 2026 Bright Path Education Hub – Empowering futures through accessible, high‑quality education.
+🙏 Acknowledgements
+Tailwind CSS for rapid styling
+
+Font Awesome for icons
+
+Cloudinary for file hosting
+
+All contributors and early adopters

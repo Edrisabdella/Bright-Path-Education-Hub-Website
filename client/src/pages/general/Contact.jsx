@@ -1,0 +1,1 @@
+export default () => <div className="container mx-auto py-16"><h1 className="text-3xl font-bold">Contact</h1><p>Email: info@brightpath.com | Phone: +251911870215</p></div>;

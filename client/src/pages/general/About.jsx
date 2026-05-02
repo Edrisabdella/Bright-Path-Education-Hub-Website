@@ -1,0 +1,1 @@
+export default () => <div className="container mx-auto py-16"><h1 className="text-3xl font-bold">About Us</h1><p>We provide world-class tutoring and digital skills training.</p></div>;
