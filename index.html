@@ -15,8 +15,6 @@
     .admin-badge { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
     .nav-link { transition: color 0.2s; }
     .nav-link:hover { color: #eab308; }
-    
-    /* Hero slideshow background */
     .hero-slideshow {
       transition: background-image 1s ease-in-out;
       background-size: cover;
@@ -29,10 +27,7 @@
       background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
       z-index: 1;
     }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
+    .hero-content { position: relative; z-index: 2; }
   </style>
 </head>
 <body class="bg-gray-50">
@@ -62,7 +57,6 @@
         <button id="mobileMenuBtn" class="text-2xl"><i class="fas fa-bars"></i></button>
       </div>
     </div>
-    <!-- Mobile menu -->
     <div id="mobileMenu" class="hidden md:hidden bg-white pb-4 px-4 flex flex-col space-y-2 border-t">
       <a href="#home" class="py-2">Home</a>
       <a href="#about-full" class="py-2">About</a>
@@ -74,7 +68,7 @@
     </div>
   </nav>
 
-  <!-- ==================== HERO SECTION with SLIDESHOW BACKGROUND ==================== -->
+  <!-- ==================== HERO with SLIDESHOW (removed extra exam line) ==================== -->
   <section id="home" class="relative h-[85vh] flex items-center justify-center hero-slideshow" style="background-image: url('https://i.ibb.co/JW2T32jR/photo-2-2026-04-17-21-33-56.jpg');">
     <div class="hero-overlay"></div>
     <div class="hero-content text-center px-4">
@@ -88,7 +82,7 @@
     </div>
   </section>
 
-  <!-- ==================== FOUNDER SECTION ==================== -->
+  <!-- ==================== FOUNDER ==================== -->
   <section class="py-12 bg-white">
     <div class="container mx-auto px-4 text-center max-w-3xl">
       <div class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg">
@@ -103,38 +97,38 @@
     </div>
   </section>
 
-  <!-- ==================== ABOUT DETAILS ==================== -->
+  <!-- ==================== ABOUT (Detailed as requested) ==================== -->
   <section id="about-full" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4 max-w-4xl">
       <h2 class="text-3xl font-bold text-center text-indigo-800 mb-6">About Bright Path Education Hub</h2>
       <div class="bg-white p-8 rounded-2xl shadow-lg space-y-4 text-gray-700 leading-relaxed">
         <p><strong>Bright Path Education Hub</strong> is a premier online and face-to-face learning center founded by Nejat Mahammednur, a PhD candidate at Addis Ababa University and lecturer at Dire Dawa University. Our hub was born from a vision to bridge the gap between traditional education and the demands of the 21st century.</p>
-        <p>We offer comprehensive tutoring from Grade 1 to university level, international exam preparation (IELTS, TOEFL, SAT, GAT, DELF, Goethe, Duolingo English Test), professional digital skills training (full‑stack development, digital marketing, video editing, motion graphics, Forex trading, ICT), language courses in 7+ languages, and Quranic studies with Tajwid and Hifz.</p>
+        <p>We offer comprehensive tutoring from Grade 1 to university level, international exam preparation (IELTS, TOEFL, SAT, GAT), professional digital skills training (full‑stack development, digital marketing, video editing, motion graphics, Forex trading, ICT), language courses in 7+ languages, and Quranic studies with Tajwid and Hifz.</p>
         <p>Our instructors are experienced, our methods are modern, and our commitment is to every learner's success. We believe that <strong>quality education should be accessible, affordable, and personalised</strong>. Whether you are a school student struggling with math, a university student preparing for exit exams, a professional wanting to upskill, or an organisation seeking staff training – Bright Path is your trusted partner.</p>
         <p>We currently serve hundreds of learners across Ethiopia and globally through our flexible online platform and in‑person sessions. Our success rates in national exams and international certifications speak for themselves. Join us today and walk the bright path to excellence.</p>
       </div>
     </div>
   </section>
 
-  <!-- ==================== VISION & MISSION ==================== -->
+  <!-- ==================== VISION & MISSION (Generic, no hardcoded exam names) ==================== -->
   <section id="vision-mission" class="py-16 bg-white">
     <div class="container mx-auto px-4 grid md:grid-cols-2 gap-8 max-w-5xl">
       <div class="bg-indigo-50 p-6 rounded-2xl shadow">
         <i class="fas fa-eye text-4xl text-indigo-700 mb-3"></i>
         <h3 class="text-2xl font-bold">Our Vision</h3>
-        <p class="mt-3 text-gray-700">To become a leading international learning center that empowers students worldwide to achieve academic excellence, master global languages (including DELF, Goethe, Duolingo), and acquire future‑ready professional skills – creating lifelong learners who positively impact their communities.</p>
+        <p class="mt-3 text-gray-700">To become a leading international learning center that empowers students worldwide to achieve academic excellence, master global languages, and acquire future‑ready professional skills – creating lifelong learners who positively impact their communities.</p>
         <p class="mt-2 text-gray-600">We envision a world where every learner, regardless of background, has access to quality education that unlocks their full potential and prepares them for global opportunities.</p>
       </div>
       <div class="bg-indigo-50 p-6 rounded-2xl shadow">
         <i class="fas fa-bullseye text-4xl text-indigo-700 mb-3"></i>
         <h3 class="text-2xl font-bold">Our Mission</h3>
-        <p class="mt-3 text-gray-700">Deliver high‑quality, affordable tutoring for Grades 1–12 and university courses; prepare students for local and international exams including IELTS, TOEFL, SAT, GAT, DELF, Goethe, Duolingo; provide cutting‑edge digital skills training; offer language and Quranic education; and maintain a supportive, student‑centered environment with flexible online/face‑to‑face options.</p>
+        <p class="mt-3 text-gray-700">Deliver high‑quality, affordable tutoring for Grades 1–12 and university courses; prepare students for local and international exams; provide cutting‑edge digital skills training; offer language and Quranic education; and maintain a supportive, student‑centered environment with flexible online/face‑to‑face options.</p>
         <p class="mt-2 text-gray-600">We are committed to continuous improvement, innovation, and ensuring every student achieves measurable progress.</p>
       </div>
     </div>
   </section>
 
-  <!-- ==================== GOALS & VALUES ==================== -->
+  <!-- ==================== GOALS & VALUES (Detailed as requested) ==================== -->
   <section id="goals-values" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4 grid md:grid-cols-2 gap-8 max-w-5xl">
       <div class="bg-white p-6 rounded-2xl shadow">
@@ -142,7 +136,7 @@
         <h3 class="text-2xl font-bold">Strategic Goals</h3>
         <ul class="mt-3 list-disc list-inside text-gray-700 space-y-2">
           <li>Improve student academic performance by 40% within 6 months.</li>
-          <li>Achieve 90%+ success rate in international exams (IELTS, TOEFL, SAT, GAT, DELF, Goethe, Duolingo).</li>
+          <li>Achieve 90%+ success rate in international exams (IELTS, TOEFL, SAT).</li>
           <li>Train 5,000+ learners in digital skills by 2027.</li>
           <li>Expand to 10 African countries through online partnerships.</li>
           <li>Maintain 4.9/5 student satisfaction score.</li>
@@ -164,31 +158,30 @@
     </div>
   </section>
 
-  <!-- ==================== COMPREHENSIVE SERVICES (EXPANDED) ==================== -->
+  <!-- ==================== SERVICES (includes DELF/Goethe/Duolingo only in the relevant card) ==================== -->
   <section id="services-detailed" class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold text-center mb-4">Our Comprehensive Services</h2>
-      <p class="text-center text-gray-600 mb-10">Click any service to access resources, submit assignments, and track your progress.<br>✨ Now offering DELF, Goethe, and Duolingo English Test prep within our international exam bundle ✨</p>
+      <p class="text-center text-gray-600 mb-10">Click any service to access resources & submit assignments.<br>✨ International exam prep includes <strong>IELTS / TOEFL / GAT / SAT / DELF / Goethe / Duolingo English Test</strong> ✨</p>
       <div id="servicesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
     </div>
   </section>
 
-  <!-- ==================== RESOURCES SECTION ==================== -->
+  <!-- ==================== RESOURCES ==================== -->
   <section id="resources" class="py-16 bg-gray-100">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-4">Learning Resources & Submissions</h2>
-      <p class="mb-6">Access materials, upload your work, and get feedback. All your submissions are saved here.</p>
       <button id="viewMySubmissionsBtn" class="bg-indigo-600 text-white px-6 py-2 rounded-full">View My Submissions</button>
     </div>
   </section>
 
-  <!-- ==================== CONTACT SECTION ==================== -->
+  <!-- ==================== CONTACT ==================== -->
   <section id="contact" class="py-16 bg-gray-900 text-white">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
       <div class="flex flex-wrap justify-center gap-6 mb-6">
-        <a href="tel:+251911870215" class="bg-green-600 hover:bg-green-700 px-5 py-3 rounded-full text-lg"><i class="fas fa-phone-alt"></i> +251911870215</a>
-        <a href="mailto:nejat.mahammednur@aau.edu.et" class="bg-gray-700 hover:bg-gray-600 px-5 py-3 rounded-full text-lg"><i class="fas fa-envelope"></i> Email Us</a>
+        <a href="tel:+251911870215" class="bg-green-600 hover:bg-green-700 px-5 py-3 rounded-full"><i class="fas fa-phone-alt"></i> +251911870215</a>
+        <a href="mailto:nejat.mahammednur@aau.edu.et" class="bg-gray-700 hover:bg-gray-600 px-5 py-3 rounded-full"><i class="fas fa-envelope"></i> Email Us</a>
       </div>
       <div class="flex justify-center gap-6 text-3xl">
         <a href="https://youtube.com/@educationhubacademy-u3n" target="_blank" class="text-red-500"><i class="fab fa-youtube"></i></a>
@@ -200,18 +193,18 @@
   </section>
 
   <footer class="bg-gray-800 py-6 text-center text-gray-300 text-sm">
-    <p>© 2026 Bright Path Education Hub — Empowering futures. 📞 +251911870215 | DELF • Goethe • Duolingo English Test Experts</p>
+    <p>© 2026 Bright Path Education Hub — Empowering futures. 📞 +251911870215</p>
   </footer>
 
   <!-- ==================== MODALS ==================== -->
-  <!-- Registration / Login Modal -->
   <div id="authModal" class="modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 relative">
       <button id="closeAuthModal" class="absolute top-3 right-5 text-2xl text-gray-600">&times;</button>
       <h2 id="authModalTitle" class="text-2xl font-bold mb-4">Join Bright Path</h2>
       <div id="regForm">
-        <input type="text" id="regName" placeholder="Full Name" class="w-full border p-2 rounded mb-3" required>
-        <input type="email" id="regEmail" placeholder="Email Address" class="w-full border p-2 rounded mb-3" required>
+        <input type="text" id="regName" placeholder="Full Name" class="w-full border p-2 rounded mb-3">
+        <input type="email" id="regEmail" placeholder="Email Address" class="w-full border p-2 rounded mb-3">
+        <input type="password" id="regPassword" placeholder="Password (min 6 characters)" class="w-full border p-2 rounded mb-3">
         <select id="serviceSelect" class="w-full border p-2 rounded mb-3">
           <option value="">Select your program</option>
           <option>Grade 1-12</option><option>University Course Tutor</option><option>Entrance Exam Prep</option>
@@ -220,9 +213,7 @@
         </select>
         <select id="gradeSelect" class="w-full border p-2 rounded mb-3">
           <option value="">Select Grade (if applicable)</option>
-          <option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option>
-          <option>Grade 6</option><option>Grade 7</option><option>Grade 8</option><option>Grade 9</option><option>Grade 10</option>
-          <option>Grade 11</option><option>Grade 12</option><option>University</option><option>Professional</option>
+          <option>Grade 1-6</option><option>Grade 7-12</option><option>University</option><option>Professional</option>
         </select>
         <button id="registerBtn" class="bg-indigo-600 text-white w-full py-2 rounded mt-2">Register & Start Learning</button>
         <p class="text-center text-sm mt-3">Already registered? <button id="switchToLogin" class="text-indigo-600 underline">Login here</button></p>
@@ -231,14 +222,14 @@
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUDz5Ue3ip34oibjRUkV1H1IxRcT2VPW4tVHnVxnXWHZuM0w/viewform?usp=publish-editor" target="_blank" class="block text-center bg-red-500 text-white py-2 rounded mt-2">Open Google Form</a>
       </div>
       <div id="loginForm" class="hidden">
-        <input type="email" id="loginEmail" placeholder="Your registered email" class="w-full border p-2 rounded mb-3">
+        <input type="email" id="loginEmail" placeholder="Email" class="w-full border p-2 rounded mb-3">
+        <input type="password" id="loginPassword" placeholder="Password" class="w-full border p-2 rounded mb-3">
         <button id="loginSubmitBtn" class="bg-green-600 text-white w-full py-2 rounded">Login</button>
         <p class="text-center text-sm mt-3">New user? <button id="switchToReg" class="text-indigo-600 underline">Create account</button></p>
       </div>
     </div>
   </div>
 
-  <!-- Service Modal (Resources & Submit) -->
   <div id="serviceModal" class="modal fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 p-4">
     <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-6 relative">
       <button id="closeServiceModal" class="absolute top-3 right-5 text-3xl text-gray-600">&times;</button>
@@ -247,63 +238,45 @@
     </div>
   </div>
 
-  <!-- Admin Panel (floating button) -->
   <button id="adminBtn" class="admin-badge bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-4 rounded-full shadow-lg"><i class="fas fa-user-shield"></i> Admin</button>
 
   <script>
-    // ---------- LOCALSTORAGE / INDEXEDDB SIMULATION ----------
+    // -------------------- DATA LAYER (localStorage) --------------------
     let currentUser = null;
 
-    // Initialize data
     if (!localStorage.getItem('brightpath_users')) {
-      localStorage.setItem('brightpath_users', JSON.stringify([]));
+      localStorage.setItem('brightpath_users', JSON.stringify([
+        { id: 'admin1', name: 'Admin User', email: 'admin@brightpath.com', password: 'admin123', role: 'admin', selected_service: 'Admin', grade_level: '' }
+      ]));
     }
     if (!localStorage.getItem('brightpath_submissions')) {
       localStorage.setItem('brightpath_submissions', JSON.stringify([]));
     }
 
-    function saveUsers(users) { localStorage.setItem('brightpath_users', JSON.stringify(users)); }
     function getUsers() { return JSON.parse(localStorage.getItem('brightpath_users')); }
-    function saveSubmissions(subs) { localStorage.setItem('brightpath_submissions', JSON.stringify(subs)); }
+    function saveUsers(users) { localStorage.setItem('brightpath_users', JSON.stringify(users)); }
     function getSubmissions() { return JSON.parse(localStorage.getItem('brightpath_submissions')); }
-
-    // Helper: send email notification via mailto
+    function saveSubmissions(subs) { localStorage.setItem('brightpath_submissions', JSON.stringify(subs)); }
     function notifyFounder(subject, body) {
       window.open(`mailto:nejat.mahammednur@aau.edu.et?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
     }
 
-    // UPDATED SERVICES LIST including DELF, Goethe, Duolingo in the international exam bundle
     const servicesList = [
-      "Grade 1-12 All subjects", 
-      "University course tutor", 
-      "Entrance Exam Prep (6,8,12)", 
-      "Exit Exam Prep",
-      "Special Training: NGOs/Companies", 
-      "Consultancy", 
-      "IELTS / TOEFL / GAT / SAT / DELF / Goethe / Duolingo English Test",   // merged exam prep
-      "Full Stack Development",
-      "Digital Marketing", 
-      "Content Creation", 
-      "Video Editing", 
-      "ICT Training", 
-      "Website & Software Development",
-      "Forex Trading", 
-      "Motion Graphics", 
-      "Graphics Design", 
-      "Scholarship & Research", 
-      "Language Training",
-      "Quran Tejwid & Hifz"
+      "Grade 1-12 All subjects", "University course tutor", "Entrance Exam Prep (6,8,12)", "Exit Exam Prep",
+      "Special Training: NGOs/Companies", "Consultancy", 
+      "IELTS / TOEFL / GAT / SAT / DELF / Goethe / Duolingo English Test",
+      "Full Stack Development", "Digital Marketing", "Content Creation", "Video Editing", "ICT Training",
+      "Website & Software Development", "Forex Trading", "Motion Graphics", "Graphics Design",
+      "Scholarship & Research", "Language Training", "Quran Tejwid & Hifz"
     ];
 
-    // Render services grid
     function renderServices() {
       const grid = document.getElementById('servicesGrid');
       if (!grid) return;
       grid.innerHTML = '';
       servicesList.forEach(svc => {
         const card = document.createElement('div');
-        card.className = 'service-card bg-white p-5 rounded-2xl shadow-md cursor-pointer hover:shadow-xl transition';
-        // special badge for new language tests
+        card.className = 'service-card bg-white p-5 rounded-2xl shadow-md cursor-pointer hover:shadow-xl';
         let badge = '';
         if (svc.includes('DELF') || svc.includes('Goethe') || svc.includes('Duolingo')) {
           badge = '<span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full ml-2">🌟 DELF • Goethe • Duolingo</span>';
@@ -314,16 +287,14 @@
       });
     }
 
-    // Open service modal
     async function openServiceModal(serviceName) {
-      if (!currentUser) { alert('Please login first'); showAuthModal('reg'); return; }
+      if (!currentUser) { alert('Please login first'); showAuthModal('login'); return; }
       document.getElementById('serviceModalTitle').innerText = serviceName;
       const bodyDiv = document.getElementById('serviceModalBody');
       bodyDiv.innerHTML = '<div class="text-center py-4"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
       document.getElementById('serviceModal').classList.remove('hidden');
       document.getElementById('serviceModal').style.display = 'flex';
 
-      // Get user's previous submissions for this service
       const allSubs = getSubmissions();
       const mySubs = allSubs.filter(s => s.userEmail === currentUser.email && s.service === serviceName);
       let subsHtml = '<h4 class="font-bold text-lg mt-4">📝 Your Submissions</h4><div class="space-y-2">';
@@ -346,10 +317,9 @@
           </form>
         </div>
       `;
-      bodyDiv.innerHTML = `<div class="mb-4 p-3 bg-yellow-50 rounded"><i class="fas fa-download text-green-600"></i> <strong>Resources:</strong> Comprehensive prep materials for ${serviceName} including mock tests, study guides, and video lessons will be available soon. For DELF/Goethe/Duolingo, expert coaches are assigned.</div>` + subsHtml + formHtml;
+      bodyDiv.innerHTML = `<div class="mb-4 p-3 bg-yellow-50 rounded"><i class="fas fa-download text-green-600"></i> <strong>Resources:</strong> Prep materials for ${serviceName} including mock tests and guides.</div>` + subsHtml + formHtml;
 
       const form = document.getElementById('submitWorkForm');
-      // Remove previous listener to avoid duplicates
       const newForm = form.cloneNode(true);
       form.parentNode.replaceChild(newForm, form);
       newForm.addEventListener('submit', async (e) => {
@@ -362,13 +332,7 @@
           const reader = new FileReader();
           fileData = await new Promise(resolve => { reader.onload = () => resolve(reader.result); reader.readAsDataURL(file); });
         }
-        const newSub = {
-          userEmail: currentUser.email,
-          userName: currentUser.name,
-          service: serviceName,
-          title, description, fileData,
-          date: new Date().toISOString()
-        };
+        const newSub = { userEmail: currentUser.email, userName: currentUser.name, service: serviceName, title, description, fileData, date: new Date().toISOString() };
         const subs = getSubmissions();
         subs.push(newSub);
         saveSubmissions(subs);
@@ -378,7 +342,7 @@
       });
     }
 
-    // Auth functions
+    // Authentication
     function showAuthModal(type) {
       document.getElementById('authModalTitle').innerText = type === 'reg' ? 'Create Your Profile' : 'Login to Your Account';
       document.getElementById('regForm').classList.toggle('hidden', type !== 'reg');
@@ -390,31 +354,35 @@
     document.getElementById('registerBtn').onclick = () => {
       const name = document.getElementById('regName').value.trim();
       const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
       const selected_service = document.getElementById('serviceSelect').value;
       const grade_level = document.getElementById('gradeSelect').value;
-      if (!name || !email) { alert('Name and email required'); return; }
+      if (!name || !email || password.length < 6) { alert('Name, email and password (min 6 chars) required'); return; }
       let users = getUsers();
       if (users.find(u => u.email === email)) { alert('Email already registered. Please login.'); return; }
-      const newUser = { name, email, selected_service, grade_level, role: 'learner', registeredAt: new Date().toISOString() };
+      const newUser = { id: Date.now().toString(), name, email, password, role: 'learner', selected_service, grade_level };
       users.push(newUser);
       saveUsers(users);
-      currentUser = { ...newUser, token: 'dummy' };
+      currentUser = { ...newUser, password: undefined };
       localStorage.setItem('brightpath_current_user', JSON.stringify(currentUser));
-      notifyFounder('New Registration', `Name: ${name}\nEmail: ${email}\nProgram: ${selected_service}\nGrade: ${grade_level || 'N/A'}`);
+      notifyFounder('New Registration', `Name: ${name}\nEmail: ${email}\nProgram: ${selected_service}\nGrade: ${grade_level}`);
       alert('Registration successful! You are now logged in.');
       updateUI();
       closeModal('authModal');
+      location.reload();
     };
 
     document.getElementById('loginSubmitBtn').onclick = () => {
       const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
       const users = getUsers();
-      const user = users.find(u => u.email === email);
-      if (!user) { alert('User not found. Please register first.'); return; }
-      currentUser = { ...user, token: 'dummy' };
+      const user = users.find(u => u.email === email && u.password === password);
+      if (!user) { alert('Invalid email or password'); return; }
+      currentUser = { ...user, password: undefined };
       localStorage.setItem('brightpath_current_user', JSON.stringify(currentUser));
       updateUI();
       closeModal('authModal');
+      location.reload();
     };
 
     document.getElementById('switchToLogin').onclick = () => showAuthModal('login');
@@ -439,10 +407,10 @@
       updateUI();
       location.reload();
     };
-    document.getElementById('loginBtn').onclick = () => showAuthModal('reg');
+    document.getElementById('loginBtn').onclick = () => showAuthModal('login');
     document.getElementById('registerHeroBtn').onclick = () => showAuthModal('reg');
 
-    // Admin panel
+    // Admin Panel
     document.getElementById('adminBtn').onclick = () => {
       const pwd = prompt('Enter admin password:');
       if (pwd !== 'admin123') { alert('Wrong password'); return; }
@@ -450,18 +418,16 @@
       const submissions = getSubmissions();
       let html = `<div class="fixed inset-0 bg-black bg-opacity-80 z-[200] flex items-center justify-center p-4"><div class="bg-white rounded-2xl w-full max-w-4xl max-h-[85vh] overflow-y-auto p-6"><div class="flex justify-between"><h2 class="text-2xl font-bold">Admin Dashboard</h2><button id="closeAdminDash" class="text-2xl">&times;</button></div>
       <h3 class="font-bold mt-4 text-lg">Registered Users (${users.length})</h3><div class="grid grid-cols-1 gap-2 max-h-60 overflow-y-auto">${users.map(u => `<div class="border p-2 rounded">${u.name} (${u.email}) - ${u.selected_service || 'N/A'} - Grade: ${u.grade_level || '-'}</div>`).join('')}</div>
-      <h3 class="font-bold mt-4 text-lg">All Submissions (${submissions.length})</h3><div class="space-y-2 max-h-60 overflow-y-auto">${submissions.map(s => `<div class="border p-2 rounded"><strong>${s.userName}</strong> - ${s.service}<br>${s.title}<br>${s.description.substring(0,100)}<br><span class="text-xs text-gray-500">${new Date(s.date).toLocaleString()}</span></div>`).join('')}</div>
+      <h3 class="font-bold mt-4 text-lg">All Submissions (${submissions.length})</h3><div class="space-y-2 max-h-60 overflow-y-auto">${submissions.map(s => `<div class="border p-2 rounded"><strong>${s.userName}</strong> - ${s.service}<br>${s.title}<br>${s.description?.substring(0,100) || ''}<br><span class="text-xs text-gray-500">${new Date(s.date).toLocaleString()}</span></div>`).join('')}</div>
       </div></div>`;
       document.body.insertAdjacentHTML('beforeend', html);
       document.getElementById('closeAdminDash').onclick = () => document.querySelector('.fixed.inset-0.bg-black.bg-opacity-80').remove();
     };
 
-    // View My Submissions button
     document.getElementById('viewMySubmissionsBtn').onclick = () => {
       if (!currentUser) { alert('Please login first'); return; }
-      const allSubs = getSubmissions();
-      const mySubs = allSubs.filter(s => s.userEmail === currentUser.email);
-      if (mySubs.length === 0) alert('You have no submissions yet.');
+      const mySubs = getSubmissions().filter(s => s.userEmail === currentUser.email);
+      if (mySubs.length === 0) alert('No submissions yet.');
       else {
         let msg = 'Your Submissions:\n';
         mySubs.forEach(s => msg += `\n${s.service}: ${s.title} (${new Date(s.date).toLocaleDateString()})`);
@@ -469,45 +435,28 @@
       }
     };
 
-    // Modal close helpers
     function closeModal(id) {
       const el = document.getElementById(id);
       if (el) { el.classList.add('hidden'); el.style.display = 'none'; }
     }
     document.getElementById('closeAuthModal').onclick = () => closeModal('authModal');
     document.getElementById('closeServiceModal').onclick = () => closeModal('serviceModal');
-    window.onclick = (e) => {
-      if (e.target.classList.contains('modal')) closeModal(e.target.id);
-    };
+    window.onclick = (e) => { if (e.target.classList?.contains('modal')) closeModal(e.target.id); };
+    document.getElementById('mobileMenuBtn').onclick = () => document.getElementById('mobileMenu').classList.toggle('hidden');
 
-    // Mobile menu toggle
-    document.getElementById('mobileMenuBtn').onclick = () => {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('hidden');
-    };
-
-    // Restore session
     const savedUser = localStorage.getItem('brightpath_current_user');
-    if (savedUser) {
-      currentUser = JSON.parse(savedUser);
-      updateUI();
-    }
+    if (savedUser) { currentUser = JSON.parse(savedUser); updateUI(); }
     renderServices();
 
-    // ---------- HERO BACKGROUND SLIDESHOW ----------
+    // Hero Slideshow
     const heroImages = [
       "https://i.ibb.co/JW2T32jR/photo-2-2026-04-17-21-33-56.jpg",
       "https://i.ibb.co/RWywwBn/photo-3-2026-04-17-21-33-56.jpg",
-      "https://i.ibb.co/RWywwBn/photo-3-2026-04-17-21-33-56.jpg"  // duplicate from requirement but we keep consistent
+      "https://i.ibb.co/RWywwBn/photo-3-2026-04-17-21-33-56.jpg"
     ];
-    let currentIndex = 0;
-    const heroSection = document.querySelector('.hero-slideshow');
-    if (heroSection) {
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % heroImages.length;
-        heroSection.style.backgroundImage = `url('${heroImages[currentIndex]}')`;
-      }, 5000); // change every 5 seconds
-    }
+    let idx = 0;
+    const hero = document.querySelector('.hero-slideshow');
+    if (hero) setInterval(() => { idx = (idx+1)%heroImages.length; hero.style.backgroundImage = `url('${heroImages[idx]}')`; }, 5000);
   </script>
 </body>
 </html>
