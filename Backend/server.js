@@ -13,10 +13,15 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.static('public'));
 
-// ---------- Database ----------
-const db = new sqlite3.Database('./database.sqlite', (err) => {
-  if (err) console.error('Database connection error:', err);
-  else console.log('Connected to SQLite database');
+// ---------- Database setup (SQLite) ----------
+// Use /tmp for Render's ephemeral storage (persists during runtime)
+const dbPath = process.env.NODE_ENV === 'production' ? '/tmp/database.sqlite' : './database.sqlite';
+const db = new sqlite3.Database(dbPath, (err) => {
+  if (err) {
+    console.error('❌ Database connection error:', err.message);
+    process.exit(1);
+  }
+  console.log('✅ Connected to SQLite database at', dbPath);
 });
 
 db.serialize(() => {
@@ -46,22 +51,28 @@ db.serialize(() => {
 
   // Create admin user if not exists
   db.get(`SELECT * FROM users WHERE email = 'admin@brightpath.com'`, (err, row) => {
+    if (err) {
+      console.error('Admin check error:', err);
+      return;
+    }
     if (!row) {
       const hashed = bcrypt.hashSync('admin123', 10);
       db.run(`INSERT INTO users (name, email, password, role, verified) VALUES (?, ?, ?, ?, ?)`,
-        ['Admin', 'admin@brightpath.com', hashed, 'admin', 1]);
-      console.log('Admin user created');
+        ['Admin', 'admin@brightpath.com', hashed, 'admin', 1], (err) => {
+          if (err) console.error('Failed to create admin:', err);
+          else console.log('✅ Admin user created');
+        });
     }
   });
 });
 
-// ---------- Helper functions ----------
+// ---------- Helper: send email (logs to console if no real transporter) ----------
 function sendEmail(to, subject, text) {
-  // For testing, just log. In production, set EMAIL_USER/PASS.
-  console.log(`📧 To: ${to}\nSubject: ${subject}\nBody: ${text}`);
+  console.log(`📧 Email would be sent to ${to}: ${subject}\n${text}`);
   return Promise.resolve();
 }
 
+// ---------- JWT Middleware ----------
 function verifyToken(req, res, next) {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) return res.status(401).json({ error: 'Unauthorized' });
@@ -75,19 +86,29 @@ function verifyToken(req, res, next) {
 }
 
 // ---------- API Routes ----------
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', (req, res) => {
   const { name, email, selected_service, grade_level } = req.body;
-  if (!name || !email) return res.status(400).json({ error: 'Name and email required' });
+  if (!name || !email) {
+    return res.status(400).json({ error: 'Name and email required' });
+  }
 
   db.get(`SELECT * FROM users WHERE email = ?`, [email], (err, user) => {
-    if (err) return res.status(500).json({ error: 'Database error' });
-    if (user) return res.status(400).json({ error: 'Email already registered' });
+    if (err) {
+      console.error('DB error:', err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    if (user) {
+      return res.status(400).json({ error: 'Email already registered' });
+    }
 
     const verificationCode = crypto.randomInt(100000, 999999).toString();
     db.run(`INSERT INTO users (name, email, selected_service, grade_level, verification_code) VALUES (?, ?, ?, ?, ?)`,
-      [name, email, selected_service, grade_level || null, verificationCode], async function(err) {
-        if (err) return res.status(500).json({ error: 'Failed to create user' });
-        await sendEmail(email, 'Verify your Bright Path account', 
+      [name, email, selected_service, grade_level || null, verificationCode], function(err) {
+        if (err) {
+          console.error('Insert error:', err);
+          return res.status(500).json({ error: 'Failed to create user' });
+        }
+        sendEmail(email, 'Verify your Bright Path account',
           `Hello ${name},\n\nYour verification code is: ${verificationCode}\n\nEnter this code on the platform.`);
         res.json({ message: 'Verification code sent', userId: this.lastID });
       });
@@ -152,86 +173,14 @@ app.get('/api/admin/submissions', verifyToken, (req, res) => {
   });
 });
 
-// Serve frontend for any other route
+// Serve frontend – must exist at public/index.html
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-// server.js (Updated for PostgreSQL)
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const { Pool } = require('pg'); // Use PostgreSQL
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
-
-const app = express();
-app.use(cors());
-app.use(express.json({ limit: '10mb' }));
-app.use(express.static('public'));
-
-// PostgreSQL connection pool
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false } // Required for Render's PostgreSQL
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`   Database: ${dbPath}`);
 });
-
-// Simple function to run SQL queries
-const query = (text, params) => pool.query(text, params);
-
-// Create tables if they don't exist
-const initDb = async () => {
-  const client = await pool.connect();
-  try {
-    await client.query(`
-      CREATE TABLE IF NOT EXISTS users (
-        id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        password TEXT,
-        role TEXT DEFAULT 'learner',
-        selected_service TEXT,
-        grade_level TEXT,
-        verified BOOLEAN DEFAULT FALSE,
-        verification_code TEXT,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      );
-      CREATE TABLE IF NOT EXISTS submissions (
-        id SERIAL PRIMARY KEY,
-        user_id INTEGER REFERENCES users(id),
-        service_name TEXT,
-        title TEXT,
-        description TEXT,
-        file_data TEXT,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      );
-    `);
-    console.log("Tables ensured!");
-    
-    // Create admin user if not exists
-    const adminCheck = await client.query("SELECT * FROM users WHERE email = 'admin@brightpath.com'");
-    if (adminCheck.rows.length === 0) {
-      const hashedPassword = await bcrypt.hash('admin123', 10);
-      await client.query(
-        "INSERT INTO users (name, email, password, role, verified) VALUES ($1, $2, $3, $4, $5)",
-        ['Admin', 'admin@brightpath.com', hashedPassword, 'admin', true]
-      );
-      console.log("Admin user created");
-    }
-  } catch (err) {
-    console.error("Database init error:", err);
-  } finally {
-    client.release();
-  }
-};
-initDb();
-
-// Your existing API routes (unchanged) but replace 'db' calls with 'query'
-// ... (rest of your backend code remains the same, use await query(...) instead of db.run/db.get)
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

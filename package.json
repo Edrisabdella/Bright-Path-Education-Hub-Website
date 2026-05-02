@@ -1,7 +1,7 @@
 {
   "name": "bright-path-hub",
   "version": "1.0.0",
-  "description": "Full-stack education platform with PostgreSQL",
+  "description": "Education platform with SQLite and email verification",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -12,6 +12,6 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "pg": "^8.11.3"
+    "sqlite3": "^5.1.6"
   }
 }
